@@ -67,8 +67,17 @@ git clone https://github.com/YangNobody12/e-commerce.git
 cd e-commerce
 ```
 
-### 2.2 สลับไปยัง Branch ของโชค
+### 2.2 เปิดโปรเจกต์ใน VS Code & เปิด Terminal
+- **วิธีที่ 1 (ผ่าน Terminal):** พิมพ์คำสั่ง `code .` แล้วกด Enter
+- **วิธีที่ 2 (ผ่านโปรแกรม):** เปิดโปรแกรม VS Code ➔ **File** > **Open Folder...** (macOS: **Open...**) ➔ เลือกโฟลเดอร์ `e-commerce`
+
+> 🖥️ **วิธีเปิด Terminal ใน VS Code:**  
+> ไปที่เมนู **Terminal** > **New Terminal** (หรือกดคีย์ลัด: ``Ctrl + ` `` สำหรับ Windows หรือ ``Cmd + ` `` สำหรับ macOS)  
+> แล้วรันคำสั่งทั้งหมดต่อจากนี้ใน Terminal ของ VS Code ได้เลย!
+
+### 2.3 สลับไปยัง Branch ของโชค
 ```bash
+# รันใน Terminal ของ VS Code:
 # ดึงข้อมูล branch ทั้งหมด
 git fetch --all
 
@@ -80,7 +89,7 @@ git branch
 # ควรเห็น: * feature/products
 ```
 
-### 2.3 ติดตั้ง Dependencies
+### 2.4 ติดตั้ง Dependencies
 ```bash
 composer install
 npm install
@@ -92,7 +101,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-### 2.4 ทดสอบ
+### 2.5 ทดสอบ
 ```bash
 php artisan serve
 # เปิด http://localhost:8000

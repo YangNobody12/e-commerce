@@ -58,16 +58,53 @@ node --version
 npm --version
 ```
 
+### 1.5 ติดตั้ง Visual Studio Code (VS Code)
+- ดาวน์โหลดตัวติดตั้งจาก https://code.visualstudio.com/
+- ติดตั้งตามขั้นตอนปกติ (Next > Finish)
+- **Extensions แนะนำใน VS Code:** (กดไอคอน Extensions ทางซ้าย หรือกด `Ctrl+Shift+X` / `Cmd+Shift+X` แล้วค้นหา):
+  - **PHP Intelephense** (ช่วย autocomplete คำสั่งและฟังก์ชัน PHP)
+  - **Laravel Blade Snippets** (ช่วยไฮไลต์สีและ snippet ให้ไฟล์ `.blade.php`)
+  - **Bootstrap 5 & FontAwesome Snippets**
+
 ---
 
 ## 🚀 ขั้นตอนที่ 2: ตั้งค่าโปรเจกต์ Laravel
 
-### 2.1 Clone Repo & สร้าง Laravel Project
+### 2.1 Clone Repo จาก GitHub
 ```bash
 # Clone repo ที่สร้างไว้แล้ว
 git clone https://github.com/YangNobody12/e-commerce.git
-cd e-commerce
 
+# เข้าไปยังโฟลเดอร์โปรเจกต์
+cd e-commerce
+```
+
+### 2.2 เปิดโปรเจกต์ใน VS Code & เปิด Terminal
+
+สามารถเปิดโปรเจกต์ใน VS Code ได้ 2 วิธี:
+
+- **วิธีที่ 1 (ผ่าน Terminal - เร็วและสะดวกที่สุด):**  
+  พิมพ์คำสั่งนี้ในหน้าต่าง terminal ขณะอยู่ที่โฟลเดอร์ `e-commerce`:
+  ```bash
+  code .
+  ```
+  *(โปรแกรม VS Code จะเปิดโฟลเดอร์ e-commerce ขึ้นมาทันที)*
+
+- **วิธีที่ 2 (เปิดจากโปรแกรม VS Code โดยตรง):**
+  1. เปิดโปรแกรม **Visual Studio Code**
+  2. ไปที่เมนูด้านบนเลือก **File** > **Open Folder...** (macOS: **File** > **Open...**)
+  3. ค้นหาและเลือกโฟลเดอร์ `e-commerce` ที่เพิ่ง clone มา แล้วกด **Select Folder** (หรือ **Open**)
+
+#### 🖥️ วิธีเปิด Terminal ภายใน VS Code:
+หลังจากเปิดโฟลเดอร์ใน VS Code แล้ว แนะนำให้ใช้ Terminal ข้างในโปรแกรม จะได้พิมพ์คำสั่งได้สะดวกโดยไม่ต้องสลับหน้าต่าง:
+1. ไปที่เมนูด้านบนเลือก **Terminal** > **New Terminal**
+   - หรือกดคีย์ลัด: ``Ctrl + ` `` (Windows) หรือ ``Cmd + ` `` (macOS) (ปุ่มตัวหนอน `~` ใต้ปุ่ม Esc)
+2. แถบ Terminal จะเปิดขึ้นมาที่ด้านล่างของหน้าจอ และจะอยู่ที่โฟลเดอร์ `e-commerce` โดยตรง
+3. **หลังจากนี้สามารถรันคำสั่งทั้งหมดใน Terminal ของ VS Code นี้ได้เลย!**
+
+### 2.3 สร้าง Laravel Project
+```bash
+# รันคำสั่งนี้ใน Terminal ของ VS Code:
 # สร้าง Laravel project ไว้ในโฟลเดอร์ชั่วคราว
 composer create-project laravel/laravel temp-laravel
 
@@ -80,7 +117,7 @@ composer install
 npm install
 ```
 
-### 2.2 ตั้งค่า Environment (.env)
+### 2.4 ตั้งค่า Environment (.env)
 ```bash
 # copy .env.example มาเป็น .env
 cp .env.example .env
@@ -89,7 +126,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-### 2.3 แก้ไขไฟล์ `.env` เชื่อมต่อ Supabase
+### 2.5 แก้ไขไฟล์ `.env` เชื่อมต่อ Supabase
 ```env
 APP_NAME="E-Commerce"
 APP_URL=http://localhost:8000
@@ -108,7 +145,7 @@ DB_PASSWORD=your-supabase-password
 > 3. ดูที่ **Connection string** → เลือก **URI**
 > 4. จะเห็น Host, Password ที่ต้องใช้
 
-### 2.4 ติดตั้ง Laravel Breeze (ระบบ Auth)
+### 2.6 ติดตั้ง Laravel Breeze (ระบบ Auth)
 ```bash
 # ติดตั้ง Breeze package
 composer require laravel/breeze --dev
@@ -127,7 +164,7 @@ npm install
 npm run build
 ```
 
-### 2.5 ตั้งค่า Pagination ให้เป็น Bootstrap 5
+### 2.7 ตั้งค่า Pagination ให้เป็น Bootstrap 5
 เนื่องจากทีมใช้ Bootstrap 5 ในหน้าแสดงผล ต้องตั้งค่าให้ Laravel pagination render สไตล์ Bootstrap (ไม่งั้นปุ่มเปลี่ยนหน้าจะกลายเป็นปุ่มลูกศรยักษ์ของ Tailwind)
 
 แก้ไข `app/Providers/AppServiceProvider.php`:
@@ -153,7 +190,7 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-### 2.6 สร้าง Layout กลางสำหรับ Admin (แชร์ให้ทั้งทีม)
+### 2.8 สร้าง Layout กลางสำหรับ Admin (แชร์ให้ทั้งทีม)
 เพื่อให้ โชค, ปิงปอง, และ กวาง เรียกใช้ `@extends('admin.layouts.app')` ได้ทันทีโดยไม่ติด error `View [admin.layouts.app] not found`
 
 สร้างไฟล์ `resources/views/admin/layouts/app.blade.php`:
