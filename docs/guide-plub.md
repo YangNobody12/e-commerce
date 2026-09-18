@@ -37,9 +37,9 @@ git config --global user.email "plub-email@example.com"
 
 ### 1.3 ติดตั้ง PHP & Composer
 
-**สำหรับ Windows (คำสั่งเดียวจบจาก Laravel Docs):**
+**สำหรับ Windows (ติดตั้งผ่าน PowerShell คำสั่งเดียวจบ):**
 1. เปิด **PowerShell แบบ Run as Administrator** (คลิกขวาที่ปุ่ม Start ➔ เลือก Terminal (Admin) หรือ PowerShell (Admin))
-2. คัดลอกคำสั่งนี้ไปวางแล้วกด Enter:
+2. รันคำสั่งนี้แล้วกด Enter:
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows'))
 ```
@@ -51,17 +51,26 @@ brew install php
 brew install composer
 ```
 
-**ตรวจสอบ:**
+**ตรวจสอบว่าติดตั้งสำเร็จ (เปิดหน้าต่าง PowerShell หรือ CMD ใหม่):**
 ```bash
 php --version
 composer --version
 ```
 
 ### 1.4 ติดตั้ง Node.js & NPM
-1. ไปที่ https://nodejs.org/
-2. ดาวน์โหลด **LTS version**
-3. ติดตั้งแบบปกติ
 
+**สำหรับ Windows (ติดตั้งผ่าน PowerShell):**
+รันคำสั่งนี้ใน **PowerShell**:
+```powershell
+winget install OpenJS.NodeJS.LTS
+```
+
+**สำหรับ macOS:**
+```bash
+brew install node
+```
+
+**ตรวจสอบว่าติดตั้งสำเร็จ:**
 ```bash
 node --version
 npm --version
