@@ -31,16 +31,35 @@ git config --global user.email "your-email@example.com"
 ```
 
 ### 1.3 ติดตั้ง PHP 8.2+ & Composer
+
+**สำหรับ Windows (เลือกวิธีใดวิธีหนึ่ง):**
+
+- **วิธีที่ 1 (ผ่าน CMD / PowerShell ด้วย `winget` - ง่ายและเร็วที่สุด):**  
+  Windows 10/11 มี `winget` ติดมากับเครื่องอยู่แล้ว เปิด **CMD** หรือ **PowerShell** แล้วรัน:
+  ```cmd
+  winget install -e --id PHP.PHP.8.3
+  winget install -e --id Composer.Composer
+  ```
+
+- **วิธีที่ 2 (คำสั่งเดียวจาก Official Laravel Docs - ผ่าน PowerShell):**  
+  เปิด **PowerShell แบบ Run as Administrator** แล้วคัดลอกคำสั่งนี้ไปวาง กด Enter:
+  ```powershell
+  Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows'))
+  ```
+  *(คำสั่งนี้จะดาวน์โหลดและติดตั้ง PHP + Composer ให้อัตโนมัติในคำสั่งเดียว)*
+
+- **วิธีที่ 3 (ดาวน์โหลดตัวติดตั้งเอง):**
+  - PHP: https://windows.php.net/download
+  - Composer: https://getcomposer.org/download/
+
+**สำหรับ macOS:**
 ```bash
-# macOS
 brew install php
 brew install composer
+```
 
-# Windows - ดาวน์โหลดจาก:
-# PHP: https://windows.php.net/download
-# Composer: https://getcomposer.org/download/
-
-# ตรวจสอบ
+**ตรวจสอบ (เปิด CMD / Terminal ใหม่):**
+```bash
 php --version
 composer --version
 ```
