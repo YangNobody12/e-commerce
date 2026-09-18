@@ -3,12 +3,15 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShopController;
+
 // ============================================
-// 🏠 หน้าแรก (พลับ)
+// 🏠 หน้าแรก & 🏪 หน้าร้าน (พลับ)
 // ============================================
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/shop/{slug}', [ShopController::class, 'show'])->name('shop.show');
 
 // ============================================
 // 🔐 Auth Routes (หยาง) - มาจาก Breeze อัตโนมัติ
