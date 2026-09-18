@@ -71,16 +71,18 @@ cd e-commerce
 ### 2.3 สลับไปยัง Branch ของปิงปอง
 ```bash
 # รันใน Terminal ของ VS Code:
-# ดึงข้อมูล branch ทั้งหมด
-git fetch --all
-
-# สลับไป branch ของปิงปอง
-git checkout feature/admin
+# สร้างและสลับไปที่ branch ของปิงปอง (ใช้ -b เพื่อสร้าง branch ใหม่ทันที)
+git checkout -b feature/admin
 
 # ตรวจสอบ
 git branch
-# ควรเห็น: * feature/admin
+# ควรเห็น: * feature/admin (มีดอกจันสีเขียวอยู่ข้างหน้า)
 ```
+
+> 💡 **หมายเหตุเรื่องคำสั่ง Git:**  
+> - ถ้าใช้ `git checkout feature/admin` (ไม่มี `-b`) แล้วขึ้นสีแดงว่า:  
+>   `error: pathspec 'feature/admin' did not match any file(s) known to git`  
+>   แสดงว่าบน GitHub ยังไม่มี branch นี้ **ให้เติม `-b` เป็น `git checkout -b feature/admin`** เพื่อสร้าง branch บนเครื่องตัวเองได้ทันทีเลยครับ!
 
 ### 2.4 ติดตั้ง Dependencies
 ```bash

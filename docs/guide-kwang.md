@@ -74,16 +74,18 @@ cd e-commerce
 ### 2.3 สลับไปยัง Branch ของกวาง
 ```bash
 # รันใน Terminal ของ VS Code:
-# ดึงข้อมูล branch ทั้งหมด
-git fetch --all
+# สร้างและสลับไปที่ branch ของกวาง (ใช้ -b เพื่อสร้าง branch ใหม่ทันที)
+git checkout -b feature/cart-orders
 
-# สลับไป branch ของกวาง
-git checkout feature/cart-orders
-
-# ตรวจสอบ
+# ตรวจสอบว่าอยู่ถูก branch
 git branch
-# ควรเห็น: * feature/cart-orders
+# ควรเห็น: * feature/cart-orders (มีดอกจันสีเขียวอยู่ข้างหน้า)
 ```
+
+> 💡 **หมายเหตุเรื่องคำสั่ง Git:**  
+> - ถ้าใช้ `git checkout feature/cart-orders` (ไม่มี `-b`) แล้วขึ้นสีแดงว่า:  
+>   `error: pathspec 'feature/cart-orders' did not match any file(s) known to git`  
+>   แสดงว่าบน GitHub ยังไม่มี branch นี้ **ให้เติม `-b` เป็น `git checkout -b feature/cart-orders`** เพื่อสร้าง branch บนเครื่องตัวเองได้ทันทีเลยครับ!
 
 ### 2.4 ติดตั้ง Dependencies
 ```bash

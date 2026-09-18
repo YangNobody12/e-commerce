@@ -95,16 +95,18 @@ cd e-commerce
 ### 2.3 สลับไปยัง Branch ของพลับ
 ```bash
 # รันใน Terminal ของ VS Code:
-# ดึงข้อมูล branch ทั้งหมดจาก GitHub
-git fetch --all
-
-# สลับไป branch ของพลับ
-git checkout feature/frontend
+# สร้างและสลับไปที่ branch ของพลับ (ใช้ -b เพื่อสร้าง branch ใหม่ทันที)
+git checkout -b feature/frontend
 
 # ตรวจสอบว่าอยู่ถูก branch
 git branch
-# ควรเห็น: * feature/frontend
+# ควรเห็น: * feature/frontend (มีดอกจันสีเขียวอยู่ข้างหน้า)
 ```
+
+> 💡 **หมายเหตุเรื่องคำสั่ง Git:**  
+> - ถ้าใช้ `git checkout feature/frontend` (ไม่มี `-b`) แล้วขึ้นสีแดงว่า:  
+>   `error: pathspec 'feature/frontend' did not match any file(s) known to git`  
+>   แสดงว่าบน GitHub ยังไม่มี branch นี้ **ให้เติม `-b` เป็น `git checkout -b feature/frontend`** เพื่อสร้าง branch บนเครื่องตัวเองได้ทันทีเลยครับ!
 
 ### 2.4 ติดตั้ง Dependencies
 ```bash

@@ -78,16 +78,18 @@ cd e-commerce
 ### 2.3 สลับไปยัง Branch ของโชค
 ```bash
 # รันใน Terminal ของ VS Code:
-# ดึงข้อมูล branch ทั้งหมด
-git fetch --all
-
-# สลับไป branch ของโชค
-git checkout feature/products
+# สร้างและสลับไปที่ branch ของโชค (ใช้ -b เพื่อสร้าง branch ใหม่ทันที)
+git checkout -b feature/products
 
 # ตรวจสอบ
 git branch
-# ควรเห็น: * feature/products
+# ควรเห็น: * feature/products (มีดอกจันสีเขียวอยู่ข้างหน้า)
 ```
+
+> 💡 **หมายเหตุเรื่องคำสั่ง Git:**  
+> - ถ้าใช้ `git checkout feature/products` (ไม่มี `-b`) แล้วขึ้นสีแดงว่า:  
+>   `error: pathspec 'feature/products' did not match any file(s) known to git`  
+>   แสดงว่าบน GitHub ยังไม่มี branch นี้ **ให้เติม `-b` เป็น `git checkout -b feature/products`** เพื่อสร้าง branch บนเครื่องตัวเองได้ทันทีเลยครับ!
 
 ### 2.4 ติดตั้ง Dependencies
 ```bash
