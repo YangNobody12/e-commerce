@@ -45,8 +45,6 @@ Route::middleware(['auth'])->group(function () {
 // ⚙️ Admin Routes (โชค / ปิงปอง / กวาง)
 // ============================================
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    // Dashboard (ปิงปอง)
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
@@ -55,4 +53,4 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 });
     // จัดการสินค้า & หมวดหมู่ (โชค)
     // จัดการคำสั่งซื้อ (กวาง)
-});
+
