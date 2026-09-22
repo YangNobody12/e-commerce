@@ -30,11 +30,21 @@ class CategoryController extends Controller
         ]);
 
         $data = $request->only(['name', 'description']);
-        $data['slug'] = Str::slug($request->name);
+        $baseSlug = Str::slug($request->name) ?: 'category-' . time();
+        $slug = $baseSlug;
+        $counter = 1;
+        while (Category::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . $counter++;
+        }
+        $data['slug'] = $slug;
 
         if ($request->hasFile('image')) {
+            $dir = public_path('images/categories');
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images/categories'), $imageName);
+            $request->image->move($dir, $imageName);
             $data['image'] = 'images/categories/' . $imageName;
         }
 
@@ -57,15 +67,25 @@ class CategoryController extends Controller
         ]);
 
         $data = $request->only(['name', 'description']);
-        $data['slug'] = Str::slug($request->name);
+        $baseSlug = Str::slug($request->name) ?: 'category-' . time();
+        $slug = $baseSlug;
+        $counter = 1;
+        while (Category::where('slug', $slug)->where('id', '!=', $category->id)->exists()) {
+            $slug = $baseSlug . '-' . $counter++;
+        }
+        $data['slug'] = $slug;
 
         if ($request->hasFile('image')) {
             if ($category->image && file_exists(public_path($category->image))) {
                 unlink(public_path($category->image));
             }
 
+            $dir = public_path('images/categories');
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images/categories'), $imageName);
+            $request->image->move($dir, $imageName);
             $data['image'] = 'images/categories/' . $imageName;
         }
 

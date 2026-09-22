@@ -21,12 +21,12 @@
                     <div class="list-group list-group-flush mb-4">
                         <a href="{{ url('/shop') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ empty($selectedCategory) ? 'fw-bold active' : '' }}" style="{{ empty($selectedCategory) ? 'background-color: #667eea; border-color: #667eea;' : '' }}">
                             <span>ทั้งหมด</span>
-                            <span class="badge {{ empty($selectedCategory) ? 'bg-light text-dark' : 'bg-secondary' }} rounded-pill">10</span>
+                            <span class="badge {{ empty($selectedCategory) ? 'bg-light text-dark' : 'bg-secondary' }} rounded-pill">{{ \App\Models\Product::where('is_active', true)->count() }}</span>
                         </a>
                         @foreach($categories as $cat)
-                            <a href="{{ url('/shop?category=' . $cat['slug']) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ $selectedCategory === $cat['slug'] ? 'fw-bold active' : '' }}" style="{{ $selectedCategory === $cat['slug'] ? 'background-color: #667eea; border-color: #667eea;' : '' }}">
-                                <span>{{ $cat['name'] }}</span>
-                                <span class="badge {{ $selectedCategory === $cat['slug'] ? 'bg-light text-dark' : 'bg-secondary' }} rounded-pill">{{ $cat['count'] }}</span>
+                            <a href="{{ url('/shop?category=' . $cat->slug) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ $selectedCategory === $cat->slug ? 'fw-bold active' : '' }}" style="{{ $selectedCategory === $cat->slug ? 'background-color: #667eea; border-color: #667eea;' : '' }}">
+                                <span>{{ $cat->name }}</span>
+                                <span class="badge {{ $selectedCategory === $cat->slug ? 'bg-light text-dark' : 'bg-secondary' }} rounded-pill">{{ $cat->products_count ?? 0 }}</span>
                             </a>
                         @endforeach
                     </div>
@@ -63,7 +63,7 @@
             <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-2 border-bottom">
                 <div>
                     <h2 class="section-title mb-0">สินค้าทั้งหมด</h2>
-                    <p class="text-muted small mt-1 mb-0">พบสินค้าทั้งหมด {{ count($products) }} รายการ</p>
+                    <p class="text-muted small mt-1 mb-0">พบสินค้าทั้งหมด {{ $products->total() }} รายการ</p>
                 </div>
                 <form method="GET" action="{{ url('/shop') }}" class="d-flex align-items-center gap-2 mt-2 mt-sm-0">
                     @if($selectedCategory)
@@ -85,7 +85,7 @@
                 </form>
             </div>
 
-            @if(count($products) === 0)
+            @if($products->count() === 0)
                 <div class="alert alert-info text-center py-5">
                     <i class="bi bi-info-circle fs-1"></i>
                     <h5 class="mt-3">ไม่พบสินค้าตามเงื่อนไขที่เลือก</h5>
@@ -95,25 +95,40 @@
             @else
                 <div class="row g-4">
                     @foreach($products as $product)
+                        @php
+                            $prodImg = $product->image 
+                                ? (str_starts_with($product->image, 'http') ? $product->image : asset($product->image))
+                                : 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop&q=60';
+                        @endphp
                         <div class="col-sm-6 col-md-6 col-lg-4">
                             <div class="card product-card h-100 d-flex flex-column">
                                 <div style="height: 220px; overflow: hidden; background: #f8f9fa;">
-                                    <img src="{{ $product['image'] }}" class="card-img-top w-100 h-100" style="object-fit: cover;" alt="{{ $product['name'] }}">
+                                    <img src="{{ $prodImg }}" class="card-img-top w-100 h-100" style="object-fit: cover;" alt="{{ $product->name }}">
                                 </div>
                                 <div class="card-body d-flex flex-column">
-                                    <span class="badge bg-secondary-subtle text-secondary align-self-start mb-2">{{ $product['category'] }}</span>
-                                    <h5 class="card-title fs-6 fw-bold flex-grow-1">{{ $product['name'] }}</h5>
-                                    <p class="product-price mb-3">฿ {{ number_format($product['price'], 2) }}</p>
+                                    <span class="badge bg-secondary-subtle text-secondary align-self-start mb-2">{{ $product->category->name ?? 'ทั่วไป' }}</span>
+                                    <h5 class="card-title fs-6 fw-bold flex-grow-1">{{ $product->name }}</h5>
+                                    <p class="product-price mb-3">฿ {{ number_format($product->price, 2) }}</p>
                                     <div class="d-flex gap-2 mt-auto">
-                                        <a href="{{ url('/shop/' . $product['slug']) }}" class="btn btn-outline-dark btn-sm flex-fill">ดูรายละเอียด</a>
-                                        <a href="{{ url('/shop/' . $product['slug']) }}" class="btn btn-add-cart btn-sm">
-                                            <i class="bi bi-cart-plus"></i>
-                                        </a>
+                                        <a href="{{ url('/shop/' . $product->slug) }}" class="btn btn-outline-dark btn-sm flex-fill">ดูรายละเอียด</a>
+                                        <form action="{{ route('cart.add') }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="btn btn-add-cart btn-sm" title="เพิ่มลงตะกร้า">
+                                                <i class="bi bi-cart-plus"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
+                </div>
+
+                {{-- Pagination Links --}}
+                <div class="d-flex justify-content-center mt-5">
+                    {{ $products->links() }}
                 </div>
             @endif
         </div>

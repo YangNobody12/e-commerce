@@ -40,8 +40,14 @@
                 <ul class="navbar-nav">
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/cart') }}">
+                            <a class="nav-link" href="{{ route('cart.index') }}">
                                 <i class="bi bi-cart3"></i> ตะกร้า
+                                @php
+                                    $cartCount = \App\Models\Cart::where('user_id', Auth::id())->sum('quantity');
+                                @endphp
+                                @if($cartCount > 0)
+                                    <span class="badge bg-danger rounded-pill">{{ $cartCount }}</span>
+                                @endif
                             </a>
                         </li>
                         <li class="nav-item dropdown">

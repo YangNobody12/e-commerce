@@ -37,12 +37,22 @@ class ProductController extends Controller
         ]);
 
         $data = $request->only(['name', 'category_id', 'description', 'price', 'stock']);
-        $data['slug'] = Str::slug($request->name);
+        $baseSlug = Str::slug($request->name) ?: 'product-' . time();
+        $slug = $baseSlug;
+        $counter = 1;
+        while (Product::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . $counter++;
+        }
+        $data['slug'] = $slug;
         $data['is_active'] = $request->has('is_active');
 
         if ($request->hasFile('image')) {
+            $dir = public_path('images/products');
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images/products'), $imageName);
+            $request->image->move($dir, $imageName);
             $data['image'] = 'images/products/' . $imageName;
         }
 
@@ -71,7 +81,13 @@ class ProductController extends Controller
         ]);
 
         $data = $request->only(['name', 'category_id', 'description', 'price', 'stock']);
-        $data['slug'] = Str::slug($request->name);
+        $baseSlug = Str::slug($request->name) ?: 'product-' . time();
+        $slug = $baseSlug;
+        $counter = 1;
+        while (Product::where('slug', $slug)->where('id', '!=', $product->id)->exists()) {
+            $slug = $baseSlug . '-' . $counter++;
+        }
+        $data['slug'] = $slug;
         $data['is_active'] = $request->has('is_active');
 
         if ($request->hasFile('image')) {
@@ -79,8 +95,12 @@ class ProductController extends Controller
                 unlink(public_path($product->image));
             }
 
+            $dir = public_path('images/products');
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images/products'), $imageName);
+            $request->image->move($dir, $imageName);
             $data['image'] = 'images/products/' . $imageName;
         }
 
