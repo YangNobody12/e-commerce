@@ -3,90 +3,684 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>บทพูดและสคริปต์การสาธิตระบบ (Live Demo Script) - E-Commerce</title>
+    <title>บทพูดและสคริปต์การสาธิตระบบอย่างละเอียด (Live Demo Script) - E-Commerce</title>
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8f9fa; color: #333; }
-        .container { max-width: 960px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-top: 30px; margin-bottom: 50px; }
-        .timeline-item { border-left: 3px solid #0d6efd; padding-left: 20px; position: relative; margin-bottom: 25px; }
-        .timeline-badge { position: absolute; left: -14px; top: 0; background: #0d6efd; color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
-        .quote-box { background: #eef2ff; border-left: 4px solid #4f46e5; padding: 12px 16px; border-radius: 6px; font-style: italic; }
+        :root {
+            --yang-color: #0d6efd;
+            --plub-color: #0891b2;
+            --chok-color: #d97706;
+            --kwang-color: #059669;
+            --pingpong-color: #7c3aed;
+        }
+        body { 
+            font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, sans-serif; 
+            background-color: #f8fafc; 
+            color: #1e293b; 
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6, .fw-title { 
+            font-family: 'Prompt', sans-serif; 
+        }
+        .main-container { 
+            max-width: 1000px; 
+            background: white; 
+            padding: 40px 48px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); 
+            margin: 30px auto; 
+        }
+        .header-box {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 18px;
+            margin-bottom: 24px;
+        }
+        .member-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 10px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 4px;
+        }
+        .member-yang { background-color: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+        .member-plub { background-color: #ecfeff; color: #0e7490; border: 1px solid #a5f3fc; }
+        .member-chok { background-color: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+        .member-kwang { background-color: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+        .member-pingpong { background-color: #f5f3ff; color: #6d28d9; border: 1px solid #ddd6fe; }
+
+        .timeline-section {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 28px;
+            border-left: 3px solid #cbd5e1;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 2px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid #64748b;
+        }
+        .timeline-yang { border-left-color: var(--yang-color); }
+        .timeline-yang::before { border-color: var(--yang-color); }
+        .timeline-plub { border-left-color: var(--plub-color); }
+        .timeline-plub::before { border-color: var(--plub-color); }
+        .timeline-chok { border-left-color: var(--chok-color); }
+        .timeline-chok::before { border-color: var(--chok-color); }
+        .timeline-kwang { border-left-color: var(--kwang-color); }
+        .timeline-kwang::before { border-color: var(--kwang-color); }
+        .timeline-pingpong { border-left-color: var(--pingpong-color); }
+        .timeline-pingpong::before { border-color: var(--pingpong-color); }
+
+        .speaker-card {
+            background-color: #f8fafc;
+            border-radius: 12px;
+            padding: 18px 22px;
+            border: 1px solid #e2e8f0;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        .action-box {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+            border-left: 4px solid #3b82f6;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+            font-size: 13.5px;
+        }
+        .action-box ol, .action-box ul {
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+        .action-box li {
+            margin-bottom: 4px;
+        }
+        .action-box li:last-child {
+            margin-bottom: 0;
+        }
+        .speech-box {
+            background-color: #f0fdf4;
+            border-radius: 10px;
+            padding: 14px 18px;
+            border-left: 4px solid #10b981;
+            font-size: 13.5px;
+            color: #064e3b;
+            line-height: 1.6;
+        }
+        .speech-box::before {
+            content: '💬 บทพูด:';
+            display: block;
+            font-weight: 700;
+            font-family: 'Prompt', sans-serif;
+            margin-bottom: 4px;
+            color: #047857;
+            font-size: 0.88rem;
+        }
+        .responsibility-tag {
+            font-size: 0.78rem;
+            padding: 2px 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            color: #475569;
+            display: inline-block;
+        }
+        .table-custom {
+            font-size: 13px;
+        }
+        .table-custom tr {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        .table-custom th {
+            background-color: #f1f5f9;
+            color: #334155;
+            font-weight: 600;
+            font-family: 'Prompt', sans-serif;
+        }
+        .setup-alert {
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 24px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        .setup-alert strong, .setup-alert h5 {
+            color: #0f172a;
+        }
+        .qa-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        .qa-question {
+            font-weight: 600;
+            color: #1e293b;
+            font-family: 'Prompt', sans-serif;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+        .qa-answer {
+            color: #334155;
+            font-size: 13px;
+            margin-bottom: 0;
+            line-height: 1.55;
+        }
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+        }
         @media print {
-            body { background: white; }
-            .container { box-shadow: none; padding: 0; }
-            .no-print { display: none; }
+            body { 
+                background-color: white !important; 
+                font-size: 12.5px; 
+                color: #0f172a !important;
+            }
+            .main-container { 
+                box-shadow: none !important; 
+                padding: 0 !important; 
+                margin: 0 !important; 
+                max-width: 100% !important;
+            }
+            .no-print { display: none !important; }
+            .setup-alert { 
+                background-color: #f8fafc !important; 
+                border: 1px solid #94a3b8 !important; 
+                color: #0f172a !important; 
+            }
+            .setup-alert * {
+                color: #0f172a !important;
+            }
+            .speech-box { 
+                background-color: #f8fafc !important; 
+                border-left: 3px solid #10b981 !important; 
+                color: #0f172a !important; 
+            }
+            .action-box { 
+                background-color: #ffffff !important; 
+                border-left: 3px solid #3b82f6 !important; 
+                color: #0f172a !important;
+            }
+            .table-custom th {
+                background-color: #e2e8f0 !important;
+                color: #0f172a !important;
+            }
+            @page {
+                size: A4;
+                margin: 12mm 10mm 12mm 10mm;
+            }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
-        <div>
-            <h1 class="fw-bold mb-1">🎬 บทพูดและสคริปต์สาธิตระบบ (Live Demo Script)</h1>
-            <p class="text-muted mb-0"><strong>โครงการ:</strong> ระบบร้านค้าออนไลน์ (E-Commerce Web Application) | <strong>เวลาสาธิต:</strong> 5 - 7 นาที</p>
-        </div>
-        <button class="btn btn-primary no-print" onclick="window.print()">🖨️ พิมพ์บทพูดเป็น PDF</button>
-    </div>
 
-    <div class="alert alert-secondary py-2 mb-4">
-        <strong>คำแนะนำ:</strong> ซ้อมพูดตามคิวเวลาและขั้นตอนการกดบนหน้าจอ โดยเตรียมเปิดบราวเซอร์ 2 หน้าต่าง (หน้าต่างปกติ = Admin, หน้าต่าง Incognito = User)
-    </div>
-
-    <!-- Step 1 -->
-    <div class="timeline-item">
-        <div class="timeline-badge"><i class="bi bi-play-fill"></i></div>
-        <span class="badge bg-primary mb-1">นาทีที่ 0:00 - 1:00</span>
-        <h5 class="fw-bold">1. บทนำและภาพรวมโปรเจกต์ (ผู้พูด: หยาง)</h5>
-        <p class="text-muted small mb-2"><strong>การกระทำ:</strong> ยืนหน้าชั้นเรียน เปิดหน้าแรกเว็บไซต์ <code>http://127.0.0.1:8000</code></p>
-        <div class="quote-box small mb-2">
-            "กราบเรียนอาจารย์และสวัสดีเพื่อนๆ ทุกคนครับ วันนี้กลุ่มของเราขออนุญาตสาธิตการทำงานจริงของ 'ระบบร้านค้าออนไลน์ E-Commerce' ซึ่งพวกเราได้ร่วมกันพัฒนาขึ้นด้วย Laravel 11 และ Bootstrap 5 โดยแบ่งงานกันเป็น 5 บทบาทอย่างชัดเจน และทำงานร่วมกันผ่าน Git Branching ครับ ในลำดับแรกขอส่งต่อให้เพื่อนพลับเพื่อสาธิตฝั่งหน้าร้านครับ"
-        </div>
-    </div>
-
-    <!-- Step 2 -->
-    <div class="timeline-item">
-        <div class="timeline-badge"><i class="bi bi-cart"></i></div>
-        <span class="badge bg-info text-dark mb-1">นาทีที่ 1:00 - 2:30</span>
-        <h5 class="fw-bold">2. การเลือกชมสินค้าและค้นหา (ผู้พูด: พลับ)</h5>
-        <p class="text-muted small mb-2"><strong>การกระทำ:</strong> ชี้ให้เห็นหน้าแรก แบนเนอร์ หมวดหมู่ และคลิกเมนู "สินค้า" (<code>/shop</code>) ลองพิมพ์ค้นหา <code>เสื้อ</code> กรองหมวดหมู่ และกรองราคา จากนั้นคลิกดูรายละเอียดสินค้า</p>
-        <div class="quote-box small mb-2">
-            "ในส่วนของหน้าร้านค้า เราได้เชื่อมต่อกับฐานข้อมูลจริง รองรับการค้นหา กรองหมวดหมู่ และกรองช่วงราคาได้อย่างแม่นยำ พร้อมทั้งมีหน้ารายละเอียดสินค้าที่แสดงจำนวนสต็อกจริงในคลัง ต่อไปขอส่งต่อให้กวางสาธิตการสั่งซื้อครับ"
+<div class="container main-container">
+    <!-- Header -->
+    <div class="header-box">
+        <div class="d-flex justify-content-between align-items-start">
+            <div>
+                <span class="badge bg-primary px-3 py-1 mb-2 fs-6">Live Presentation & Demo</span>
+                <h1 class="fw-bold mb-1 text-dark">🎬 สคริปต์การสาธิตระบบและบทพูดอย่างละเอียด</h1>
+                <p class="text-muted mb-2"><strong>โครงการ:</strong> ระบบร้านค้าออนไลน์ครบวงจร (E-Commerce Web Application)</p>
+                <div class="d-flex flex-wrap gap-2 text-muted small">
+                    <span><i class="bi bi-clock me-1 text-primary"></i> <strong>เวลาสาธิต:</strong> 7 - 10 นาที</span>
+                    <span>•</span>
+                    <span><i class="bi bi-stack me-1 text-primary"></i> <strong>Stack:</strong> Laravel 11/13 + Bootstrap 5 + Supabase PostgreSQL + Docker</span>
+                    <span>•</span>
+                    <span><i class="bi bi-globe me-1 text-primary"></i> <strong>Production:</strong> Render.com</span>
+                </div>
+            </div>
+            <button class="btn btn-outline-primary no-print px-3 py-2" onclick="window.print()">
+                <i class="bi bi-printer me-1"></i> พิมพ์เป็น PDF
+            </button>
         </div>
     </div>
 
-    <!-- Step 3 -->
-    <div class="timeline-item">
-        <div class="timeline-badge"><i class="bi bi-bag-check"></i></div>
-        <span class="badge bg-success mb-1">นาทีที่ 2:30 - 4:00</span>
-        <h5 class="fw-bold">3. ระบบตะกร้าสินค้าและการสั่งซื้อ (ผู้พูด: กวาง)</h5>
-        <p class="text-muted small mb-2"><strong>การกระทำ:</strong> เลือกจำนวน 2 ชิ้น กด "เพิ่มลงตะกร้า" ชี้ให้เห็นตัวเลขบน Navbar เปิดหน้า <code>/cart</code> ปรับจำนวนชิ้น กดไปหน้า Checkout กรอกชื่อที่อยู่ และกดยืนยันการสั่งซื้อ</p>
-        <div class="quote-box small mb-2">
-            "เมื่อลูกค้าสั่งซื้อ ระบบจะใช้ Database Transaction เพื่อตัดสต็อกสินค้าในคลังแบบ Real-time และบันทึกประวัติออเดอร์พร้อมราคาแบบคงที่ไว้ในระบบทันทีครับ ลำดับต่อไปขอส่งต่อให้โชคและปิงปองสาธิตระบบหลังบ้าน Admin ครับ"
+    <!-- Pre-Demo Checklist -->
+    <div class="setup-alert">
+        <h5 class="fw-bold text-white mb-2"><i class="bi bi-check2-circle text-success me-2"></i>การเตรียมความพร้อมก่อนเริ่มสาธิต (Pre-Demo Setup Checklist)</h5>
+        <div class="row g-3 small text-slate-200">
+            <div class="col-md-6">
+                <strong>1. เปิดบราวเซอร์ 2 หน้าต่างคู่กัน (Split Screen):</strong>
+                <ul class="mb-0 mt-1 ps-3 text-light">
+                    <li><strong>หน้าต่างปกติ (Admin):</strong> ล็อกอิน <code>admin@example.com</code> / <code>password</code> เปิดค้างที่หน้า <code>/admin</code></li>
+                    <li><strong>หน้าต่าง Incognito (User):</strong> สำหรับลูกค้าทดสอบ <code>user@example.com</code> / <code>password</code> เปิดหน้าร้านค้า</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <strong>2. URL ระบบ & Terminal:</strong>
+                <ul class="mb-0 mt-1 ps-3 text-light">
+                    <li><strong>Cloud Production URL:</strong> <code>https://ecommerce-laravel-3usf.onrender.com</code></li>
+                    <li><strong>Local URL:</strong> <code>http://127.0.0.1:8000</code></li>
+                    <li><strong>Terminal:</strong> เปิดโฟลเดอร์โปรเจกต์พร้อมรัน <code>php artisan test</code></li>
+                </ul>
+            </div>
         </div>
     </div>
 
-    <!-- Step 4 -->
-    <div class="timeline-item">
-        <div class="timeline-badge"><i class="bi bi-gear"></i></div>
-        <span class="badge bg-danger mb-1">นาทีที่ 4:00 - 5:30</span>
-        <h5 class="fw-bold">4. ระบบหลังบ้าน Admin จัดการสินค้าและออเดอร์ (ผู้พูด: โชค & ปิงปอง)</h5>
-        <p class="text-muted small mb-2"><strong>การกระทำ:</strong> สลับไปหน้าต่าง Admin (<code>/admin</code>) แสดงแดชบอร์ดสถิติ โชคสาธิตสต็อกลดลงและการเพิ่มสินค้า ปิงปองเปิดเมนูคำสั่งซื้อแล้วเปลี่ยนสถานะเป็น "จัดส่งแล้ว"</p>
-        <div class="quote-box small mb-2">
-            "ทางฝั่งผู้ดูแลระบบ เรามีแดชบอร์ดสรุปยอดขายแบบ Real-time สามารถจัดการสินค้า อัปโหลดรูปภาพ และตรวจสอบออเดอร์ของลูกค้า พร้อมเปลี่ยนสถานะการจัดส่งได้ทันทีครับ"
+    <!-- Section 1: Team Roles Table -->
+    <div class="mb-5">
+        <h3 class="fw-bold mb-3"><i class="bi bi-people-fill text-primary me-2"></i>1. ตารางสรุปการแบ่งงานและบทบาทหน้าที่ของสมาชิก (Work Breakdown)</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-custom align-middle">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">ชื่อ / บทบาท</th>
+                        <th style="width: 20%;">หน้าที่รับผิดชอบหลัก</th>
+                        <th style="width: 45%;">ระบบและฟังก์ชันที่พัฒนาขึ้นจริง</th>
+                        <th style="width: 20%;">ไฟล์โค้ดหลัก</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="member-badge member-yang">1. หยาง</span><br>
+                            <small class="text-muted fw-bold">Team Lead & DevOps</small>
+                        </td>
+                        <td>
+                            • System Architecture<br>
+                            • Cloud Infrastructure<br>
+                            • Auth & Security<br>
+                            • Automated Testing
+                        </td>
+                        <td>
+                            • ออกแบบสถาปัตยกรรมระบบ, ER Diagram และ Git Branching Workflow<br>
+                            • เชื่อมต่อฐานข้อมูล Cloud PostgreSQL บน <strong>Supabase</strong> (Tokyo Pooler)<br>
+                            • จัดทำ Dockerfile Multi-stage build, Apache config และ Reverse Proxy บน <strong>Render.com</strong><br>
+                            • แปลงระบบ Auth เป็น <strong>Bootstrap 5</strong> (Login, Register, Reset) พร้อมบังคับ HTTPS ป้องกัน Mixed Content<br>
+                            • เขียน Automated Test Suite ผ่าน <strong>40/40 Tests (100%)</strong>
+                        </td>
+                        <td>
+                            <code>AppServiceProvider.php</code><br>
+                            <code>bootstrap/app.php</code><br>
+                            <code>layouts/guest.blade.php</code><br>
+                            <code>auth/login.blade.php</code><br>
+                            <code>Dockerfile</code>, <code>render.yaml</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="member-badge member-plub">2. พลับ</span><br>
+                            <small class="text-muted fw-bold">Frontend Lead</small>
+                        </td>
+                        <td>
+                            • Main UI & Layout<br>
+                            • Home Page<br>
+                            • Shop Catalog<br>
+                            • Search & Filtering
+                        </td>
+                        <td>
+                            • ออกแบบธีมหลักของเว็บไซต์ (<code>layouts/app.blade.php</code>) ด้วย Bootstrap 5 และ Custom CSS<br>
+                            • พัฒนาหน้าแรก (Home): Hero Banner, กล่อง 7 หมวดหมู่แบบ Card ดึงจำนวนสินค้าจริงแบบ Dynamic, สินค้าใหม่ 8 รายการ<br>
+                            • พัฒนาหน้าร้านค้า (Shop Catalog): ระบบค้นหาชื่อสินค้า, ตัวกรองหมวดหมู่, ตัวกรองช่วงราคา (Min/Max), การจัดเรียงลำดับราคา/วันที่, และ Pagination แบบ Bootstrap 5<br>
+                            • พัฒนาหน้ารายละเอียดสินค้า (Product Detail): ภาพใหญ่, สต็อกจริง, ตัวเลือกจำนวนชิ้น, ปุ่มกดเพิ่มลงตะกร้า<br>
+                            • พัฒนาหน้าติดต่อเรา (Contact Us): แสดงแผนที่และรายชื่อสมาชิกในทีม
+                        </td>
+                        <td>
+                            <code>layouts/app.blade.php</code><br>
+                            <code>public/css/style.css</code><br>
+                            <code>HomeController.php</code><br>
+                            <code>ShopController.php</code><br>
+                            <code>home.blade.php</code><br>
+                            <code>shop/index.blade.php</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="member-badge member-chok">3. โชค</span><br>
+                            <small class="text-muted fw-bold">Products Lead</small>
+                        </td>
+                        <td>
+                            • Database Design<br>
+                            • Seeders & Mock Data<br>
+                            • Admin Products CRUD<br>
+                            • Thai Slug System
+                        </td>
+                        <td>
+                            • ออกแบบตาราง <code>categories</code> และ <code>products</code> พร้อมความสัมพันธ์ Foreign Key<br>
+                            • จัดทำ Seeders ข้อมูลจริง: <code>CategorySeeder</code> (7 หมวด) และ <code>ProductSeeder</code> (10 สินค้าจริง)<br>
+                            • พัฒนาระบบจัดการสินค้าฝั่ง Admin (<code>ProductController</code>): ตารางสินค้า, ฟอร์มเพิ่มสินค้าพร้อมอัปโหลดรูปภาพเข้า <code>public/images/products</code>, แก้ไขสต็อกและราคา, ลบสินค้า<br>
+                            • พัฒนาระบบจัดการหมวดหมู่ (<code>CategoryController</code>)<br>
+                            • พัฒนา <strong>Thai Slug Fallback</strong> รองรับชื่อภาษาไทยใน URL
+                        </td>
+                        <td>
+                            <code>migrations/*products.php</code><br>
+                            <code>migrations/*categories.php</code><br>
+                            <code>CategorySeeder.php</code><br>
+                            <code>ProductSeeder.php</code><br>
+                            <code>Admin/ProductController.php</code><br>
+                            <code>admin/products/*</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="member-badge member-kwang">4. กวาง</span><br>
+                            <small class="text-muted fw-bold">Cart & Orders Lead</small>
+                        </td>
+                        <td>
+                            • Cart Management<br>
+                            • Checkout System<br>
+                            • Stock Deduction Logic<br>
+                            • DB Transaction
+                        </td>
+                        <td>
+                            • ออกแบบตาราง <code>carts</code>, <code>orders</code>, <code>order_items</code><br>
+                            • พัฒนาระบบตะกร้าสินค้า (<code>CartController</code>): เพิ่มสินค้า, แสดงตัวเลข Badge บน Navbar แบบ Real-time, ปรับเพิ่ม-ลดจำนวน, ลบสินค้า, คำนวณยอดเงินรวม<br>
+                            • พัฒนาระบบสั่งซื้อ (Checkout): ฟอร์มกรอกที่อยู่จัดส่งและเบอร์โทร, สรุปรายการสินค้า<br>
+                            • พัฒนากระบวนการตัดสต็อกสินค้าด้วย <strong>Database Transaction (<code>DB::transaction</code>)</strong> ป้องกันสต็อกติดลบ<br>
+                            • สร้างระบบ Generate รหัสคำสั่งซื้ออัตโนมัติ (<code>ORD-YYYYMMDD-XXXX</code>) และหน้าประวัติคำสั่งซื้อ
+                        </td>
+                        <td>
+                            <code>migrations/*carts.php</code><br>
+                            <code>migrations/*orders.php</code><br>
+                            <code>Cart.php</code>, <code>Order.php</code><br>
+                            <code>CartController.php</code><br>
+                            <code>OrderController.php</code><br>
+                            <code>cart/index.blade.php</code><br>
+                            <code>cart/checkout.blade.php</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="member-badge member-pingpong">5. ปิงปอง</span><br>
+                            <small class="text-muted fw-bold">User & Admin Ops</small>
+                        </td>
+                        <td>
+                            • User Profile<br>
+                            • Admin Dashboard<br>
+                            • Admin Order Management<br>
+                            • User Management
+                        </td>
+                        <td>
+                            • พัฒนาระบบโปรไฟล์ผู้ใช้งาน (<code>ProfileController</code>): แสดงข้อมูลส่วนตัว, ฟอร์มแก้ไขชื่อ/อีเมล, เปลี่ยนรหัสผ่านใหม่<br>
+                            • พัฒนาระบบ <strong>Admin Dashboard</strong> (<code>DashboardController</code>): แสดงการ์ดสถิติ Real-time 4 ด้าน (ยอดขายรวม, จำนวนออเดอร์, จำนวนสินค้า, จำนวนสมาชิก)<br>
+                            • พัฒนาระบบจัดการคำสั่งซื้อสำหรับ Admin (<code>Admin/OrderController</code>): ดูรายการคำสั่งซื้อของลูกค้า, ดูรายละเอียดสินค้า, อัปเดตสถานะการจัดส่ง (รอชำระเงิน ➔ จัดส่งแล้ว ฯลฯ)<br>
+                            • พัฒนาระบบจัดการผู้ใช้ (<code>Admin/UserController</code>): ตรวจสอบรายชื่อและสิทธิ์การใช้งาน
+                        </td>
+                        <td>
+                            <code>ProfileController.php</code><br>
+                            <code>profile/show.blade.php</code><br>
+                            <code>Admin/DashboardController.php</code><br>
+                            <code>Admin/OrderController.php</code><br>
+                            <code>Admin/UserController.php</code><br>
+                            <code>admin/dashboard.blade.php</code><br>
+                            <code>admin/orders/*</code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <!-- Step 5 -->
-    <div class="timeline-item">
-        <div class="timeline-badge"><i class="bi bi-check2-circle"></i></div>
-        <span class="badge bg-dark mb-1">นาทีที่ 5:30 - 6:30</span>
-        <h5 class="fw-bold">5. ตรวจสอบผลลัพธ์ & สรุปภาพรวม (ผู้พูด: หยาง)</h5>
-        <p class="text-muted small mb-2"><strong>การกระทำ:</strong> สลับกลับมาหน้าลูกค้า รีเฟรชหน้า "คำสั่งซื้อ" แสดงสถานะเปลี่ยนเป็น "จัดส่งแล้ว" เปิดหน้า "ติดต่อเรา" และเปิด Terminal รัน <code>php artisan test</code> ผ่าน 40/40 tests</p>
-        <div class="quote-box small mb-2">
-            "จะเห็นว่าระบบหน้าบ้านและหลังบ้านทำงานสอดประสานกันแบบครบวงจร และระบบของเราผ่านการทดสอบอัตโนมัติครบ 100% กลุ่มของเราขอจบการสาธิตเพียงเท่านี้ และพร้อมตอบข้อซักถามของอาจารย์ครับ ขอบคุณครับ"
+    <!-- Section 2: Step-by-Step Live Demo Script -->
+    <div class="page-break pt-3">
+        <h3 class="fw-bold mb-3"><i class="bi bi-camera-reels-fill text-primary me-2"></i>2. สคริปต์การสาธิตอย่างละเอียดแบบแบ่งรายบุคคล (Minute-by-Minute Live Demo)</h3>
+    </div>
+
+    <!-- Step 1: Yang -->
+    <div class="timeline-section timeline-yang">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <span class="badge bg-primary me-2"><i class="bi bi-clock me-1"></i>นาทีที่ 0:00 - 1:15</span>
+                <span class="member-badge member-yang">ผู้พูด: หยาง (Team Lead & DevOps)</span>
+            </div>
+            <span class="responsibility-tag">ระบบที่พัฒนา: System Architecture, Supabase DB, Docker on Render</span>
         </div>
+        <div class="speaker-card">
+            <h5 class="fw-bold text-primary mb-2">1. บทนำ, สถาปัตยกรรมระบบ และการแบ่งงานในทีม</h5>
+            
+            <div class="action-box">
+                <strong><i class="bi bi-display me-1 text-primary"></i>สิ่งที่ต้องทำบนหน้าจอ (Screen Actions):</strong>
+                <ol class="mt-1">
+                    <li>ยืนหน้าชั้นเรียน เปิดหน้าแรกของเว็บไซต์บน Render: <code>https://ecommerce-laravel-3usf.onrender.com</code></li>
+                    <li>ชี้ให้อาจารย์เห็นแถบ URL ที่เป็น <code>https://</code> มีใบรับรองความปลอดภัย โลโก้ และเมนู Navbar สะอาดตา</li>
+                    <li>เลื่อนหน้าจอลงมาให้เห็นภาพรวมของระบบที่ดึงข้อมูลจาก Cloud Database บน Supabase (Tokyo Region)</li>
+                </ol>
+            </div>
+
+            <div class="speech-box">
+                "กราบเรียนอาจารย์ที่เคารพและสวัสดีเพื่อนๆ ทุกคนครับ วันนี้กลุ่ม E-Commerce ของพวกเรา มีความยินดีที่จะนำเสนอและสาธิตการทำงานจริงของ <strong>'ระบบร้านค้าออนไลน์ E-Commerce ครบวงจร'</strong> ครับ<br><br>
+                โปรเจกต์นี้ พวกเราทั้ง 5 คนได้ร่วมกันออกแบบและพัฒนาขึ้น โดยใช้ <strong>Laravel</strong> เป็น Backend Framework เชื่อมต่อกับฐานข้อมูล Cloud PostgreSQL บน <strong>Supabase</strong> และทำ Containerization ด้วย <strong>Docker</strong> นำขึ้นระบบ Cloud Production บน <strong>Render.com</strong> ซึ่งออนไลน์ใช้งานได้จริงแล้วในขณะนี้ครับ<br><br>
+                ในการทำงาน พวกเราได้แบ่งความรับผิดชอบออกเป็น 5 ส่วนอย่างชัดเจน ได้แก่:
+                1. ผม (หยาง) ดูแลด้าน System Architecture, DevOps, Authentication และ Cloud Infrastructure
+                2. เพื่อนพลับ ดูแลด้าน Frontend UI, หน้าแรก และระบบค้นหาแคตตาล็อกสินค้า
+                3. เพื่อนโชค ดูแลโครงสร้างฐานข้อมูลสินค้า และระบบหลังบ้านจัดการสินค้าสำหรับ Admin
+                4. เพื่อนกวาง ดูแลระบบตะกร้าสินค้า ระบบ Checkout และ Logic การตัดสต็อกสินค้า
+                5. เพื่อนปิงปอง ดูแลระบบโปรไฟล์ผู้ใช้ และระบบจัดการออเดอร์สำหรับ Admin<br><br>
+                ในลำดับแรกนี้ ขอส่งต่อให้ <strong>เพื่อนพลับ</strong> สาธิตการทำงานของฝั่งหน้าร้านและระบบค้นหาแคตตาล็อกสินค้าครับ"
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 2: Plub -->
+    <div class="timeline-section timeline-plub">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <span class="badge bg-info text-dark me-2"><i class="bi bi-clock me-1"></i>นาทีที่ 1:15 - 2:45</span>
+                <span class="member-badge member-plub">ผู้พูด: พลับ (Frontend Lead)</span>
+            </div>
+            <span class="responsibility-tag">ระบบที่พัฒนา: Main Layout, Home, Shop Catalog, Search & Filter</span>
+        </div>
+        <div class="speaker-card">
+            <h5 class="fw-bold text-info mb-2">2. ฝั่งลูกค้า: การเลือกชมสินค้า, ค้นหา และกรองช่วงราคา</h5>
+            
+            <div class="action-box">
+                <strong><i class="bi bi-display me-1 text-info"></i>สิ่งที่ต้องทำบนหน้าจอ (Screen Actions):</strong>
+                <ol class="mt-1">
+                    <li><strong>หน้าแรก (<code>/</code>):</strong> ชี้ให้เห็น Hero Banner, หมวดหมู่สินค้าทั้ง 7 หมวดหมู่พร้อมตัวเลขจำนวนสินค้าจริงจาก DB (เช่น เสื้อผ้า 1 ชิ้น, ของใช้ในบ้าน 2 ชิ้น) และการ์ดสินค้าใหม่ล่าสุด 8 รายการ</li>
+                    <li><strong>คลิกเมนู "สินค้า" (<code>/shop</code>):</strong> แสดงสินค้าทั้งหมดในรูปแบบ Grid Card สวยงาม พร้อมตัวแบ่งหน้า (Pagination)</li>
+                    <li><strong>ทดสอบระบบค้นหา (Search):</strong> พิมพ์คำว่า <code>เสื้อ</code> ➔ หน้าจอรีเฟรชแสดงเฉพาะ "เสื้อยืดแขนสั้น Cotton 100%"</li>
+                    <li><strong>ทดสอบตัวกรองหมวดหมู่ (Category Filter):</strong> คลิกเลือกหมวดหมู่ <code>ของใช้ในบ้าน</code> ➔ แสดง "ผงซักฟอก" และ "น้ำยาปรับผ้านุ่ม"</li>
+                    <li><strong>ทดสอบตัวกรองราคา (Price Filter):</strong> ป้อนราคา <code>50</code> ถึง <code>300</code> ➔ ระบบแสดงเฉพาะสินค้าที่ตรงเงื่อนไขราคา</li>
+                    <li><strong>คลิกดูสินค้า "เสื้อยืดแขนสั้น Cotton 100%":</strong> เปิดหน้า <code>/shop/t-shirt-cotton-100</code> ชี้ให้เห็นรูปภาพ รายละเอียด ราคา 350 บาท และป้ายสถานะสต็อกคงเหลือจริง (เช่น มีสินค้า 50 ชิ้น)</li>
+                </ol>
+            </div>
+
+            <div class="speech-box">
+                "สวัสดีครับอาจารย์ ผมพลับ รับผิดชอบในส่วนของ <strong>Frontend UI และระบบแคตตาล็อกหน้าร้าน</strong> ครับ<br><br>
+                สำหรับหน้าร้าน ผมได้ออกแบบ UI ด้วย <strong>Bootstrap 5</strong> โดยเน้นความสะอาดตา ใช้งานง่าย และเป็น Responsive รองรับทุกขนาดหน้าจอครับ
+                • ในหน้าแรก เราจะเห็นแบนเนอร์โปรโมชั่น และหมวดหมู่สินค้าทั้ง 7 หมวดหมู่ ซึ่งตัวเลขจำนวนสินค้าที่แสดงอยู่นี้ ถูกดึงและคำนวณสดจากฐานข้อมูลจริงผ่าน Eloquent Relationship ครับ<br>
+                • เมื่อคลิกเข้ามาที่หน้า <strong>'สินค้า' (Shop)</strong> ผู้ใช้งานสามารถค้นหาสินค้าได้สะดวกรวดเร็ว เช่น เมื่อผมพิมพ์ค้นหาคำว่า 'เสื้อ' ระบบจะ Query กรองสินค้าที่ตรงกันมาแสดงทันที<br>
+                • ด้านซ้ายมือจะมีตัวกรองหมวดหมู่ และตัวกรองช่วงราคา ซึ่งสามารถใช้งานร่วมกันได้ เช่น กรองหมวดของใช้ในบ้านที่มีราคาไม่เกิน 300 บาท<br>
+                • เมื่อลูกค้าสนใจสินค้าชิ้นไหน สามารถคลิกเข้ามาที่ <strong>'หน้ารายละเอียดสินค้า'</strong> เพื่อดูข้อมูลเชิงลึก ราคา และสต็อกคงเหลือจริงในคลังได้ทันทีครับ<br><br>
+                ลำดับต่อไป เมื่อลูกค้าถูกใจสินค้าแล้ว จะเข้าสู่กระบวนการสั่งซื้อ ขอส่งต่อให้ <strong>เพื่อนกวาง</strong> สาธิตระบบตะกร้าสินค้าและ Checkout ครับ"
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 3: Kwang -->
+    <div class="timeline-section timeline-kwang">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <span class="badge bg-success me-2"><i class="bi bi-clock me-1"></i>นาทีที่ 2:45 - 4:15</span>
+                <span class="member-badge member-kwang">ผู้พูด: กวาง (Cart & Orders Lead)</span>
+            </div>
+            <span class="responsibility-tag">ระบบที่พัฒนา: Carts, Checkout, Stock Deduction (DB Transaction)</span>
+        </div>
+        <div class="speaker-card">
+            <h5 class="fw-bold text-success mb-2">3. ฝั่งลูกค้า: ระบบตะกร้าสินค้า, การ Checkout และการตัดสต็อกสินค้า</h5>
+            
+            <div class="action-box">
+                <strong><i class="bi bi-display me-1 text-success"></i>สิ่งที่ต้องทำบนหน้าจอ (Screen Actions):</strong>
+                <ol class="mt-1">
+                    <li><strong>หน้ารายละเอียดเสื้อยืด:</strong> ปรับจำนวนเป็น <code>2</code> ชิ้น แล้วกดปุ่ม <strong>"เพิ่มลงในตะกร้า"</strong></li>
+                    <li>ชี้ให้อาจารย์ดูที่ Navbar ด้านบน: ตัวเลขสีแดง <code>2</code> ปรากฏขึ้นบนไอคอนตะกร้าทันที</li>
+                    <li><strong>คลิกเปิดหน้า "ตะกร้าสินค้า" (<code>/cart</code>):</strong> แสดงเสื้อยืด 2 ตัว x 350 บาท = 700 บาท ลองกดเพิ่มเป็น <code>3</code> ชิ้น แล้วกดอัปเดต ➔ ยอดรวมเปลี่ยนเป็น 1,050 บาท</li>
+                    <li><strong>คลิกปุ่ม "ไปหน้าสั่งซื้อสินค้า" (<code>/checkout</code>):</strong> กรอกข้อมูลจัดส่ง: ชื่อ "สมชาย ใจดี", เบอร์โทร "081-234-5678", ที่อยู่ "เชียงใหม่" ➔ กดปุ่ม <strong>"ยืนยันการสั่งซื้อ"</strong></li>
+                    <li><strong>แสดงหน้าผลลัพธ์การสั่งซื้อ (<code>/orders/{id}</code>):</strong> ชี้ให้เห็นรหัสคำสั่งซื้ออัตโนมัติ (เช่น <code>ORD-20260923-XXXX</code>) สถานะเริ่มต้นเป็นสีเหลือง "รอชำระเงิน" และสต็อกสินค้าถูกตัดออกไป 3 ชิ้นเรียบร้อย</li>
+                </ol>
+            </div>
+
+            <div class="speech-box">
+                "สวัสดีครับอาจารย์ ผมกวาง รับผิดชอบในส่วนของ <strong>ระบบตะกร้าสินค้า (Cart) และขั้นตอนการสั่งซื้อ (Checkout)</strong> ครับ<br><br>
+                จุดเด่นในส่วนที่ผมพัฒนา มีดังนี้ครับ:
+                1. เมื่อลูกค้ากดเพิ่มสินค้าลงตะกร้า ระบบจะส่งคำขอไปยัง <code>CartController</code> เพื่อบันทึกข้อมูล และมี Badge สีแดงแสดงจำนวนสินค้าบน Navbar อัปเดตให้เห็นทันที เพื่อให้ลูกค้ารู้สถานะตะกร้าของตัวเองตลอดเวลา<br>
+                2. ในหน้าตะกร้า ลูกค้าสามารถเพิ่ม-ลดจำนวนชิ้น หรือลบสินค้าที่ไม่ต้องการออกได้ โดยระบบจะคำนวณยอดเงินรวมใหม่อัตโนมัติ<br>
+                3. ในขั้นตอน <strong>Checkout (สั่งซื้อสินค้า)</strong> จุดนี้เป็นหัวใจสำคัญด้านความถูกต้องของข้อมูล ผมได้เขียนการทำงานไว้ภายใต้ <strong>Database Transaction (<code>DB::transaction</code>)</strong> ครับ หมายความว่าเมื่อลูกค้ากดยืนยันสั่งซื้อ ระบบจะทำงาน 3 อย่างพร้อมกันในคราวเดียว:
+                   - บันทึกข้อมูลใบสั่งซื้อลงตาราง <code>orders</code> พร้อม Generate เลขที่ใบสั่งซื้อเฉพาะ
+                   - นำสินค้าในตะกร้ามาบันทึกลงตาราง <code>order_items</code> พร้อมล็อกราคา ณ วันที่ซื้อ
+                   - ทำการ <strong>ตัดสต็อกสินค้าในตาราง products ทันที</strong> และล้างตะกร้าสินค้าออก
+                   - หากมีขั้นตอนใดเกิดปัญหา ระบบจะ Rollback คืนค่าทั้งหมดทันที ทำให้สต็อกไม่ผิดพลาดและไม่เกิดปัญหาสต็อกติดลบครับ<br><br>
+                หลังจากสั่งซื้อเรียบร้อย สถานะเริ่มต้นของออเดอร์จะเป็น 'รอชำระเงิน' ต่อไปจะส่งต่อให้ <strong>เพื่อนโชค และเพื่อนปิงปอง</strong> สาธิตการจัดการในฝั่งหลังบ้าน Admin ครับ"
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 4: Chok & Pingpong -->
+    <div class="timeline-section timeline-chok">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <span class="badge bg-warning text-dark me-2"><i class="bi bi-clock me-1"></i>นาทีที่ 4:15 - 5:45</span>
+                <span class="member-badge member-chok">ผู้พูด 1: โชค (Products)</span>
+                <span class="member-badge member-pingpong">ผู้พูด 2: ปิงปอง (User & Admin)</span>
+            </div>
+            <span class="responsibility-tag">ระบบที่พัฒนา: Admin Dashboard, Products CRUD, Orders Status Update</span>
+        </div>
+        <div class="speaker-card">
+            <h5 class="fw-bold text-dark mb-2">4. ฝั่งหลังบ้าน Admin: การจัดการสินค้า, ตรวจสอบสต็อก และอัปเดตสถานะคำสั่งซื้อ</h5>
+            
+            <div class="action-box">
+                <strong><i class="bi bi-display me-1 text-warning"></i>สิ่งที่ต้องทำบนหน้าจอ (Screen Actions):</strong>
+                <ol class="mt-1">
+                    <li><strong>สลับไปที่หน้าต่างบราวเซอร์ที่ 1 (ล็อกอินเป็น Admin ค้างไว้):</strong></li>
+                    <li><strong>ปิงปองเปิดหน้า Admin Dashboard (<code>/admin</code>):</strong> ชี้ให้เห็นการ์ดสถิติ 4 ใบ ยอดขายรวมเพิ่มขึ้นตามยอด 1,050 บาทที่กวางเพิ่งสั่งซื้อ, ออเดอร์เพิ่มขึ้น 1 รายการ</li>
+                    <li><strong>โชคเปิดหน้าจัดการสินค้า (<code>/admin/products</code>):</strong> ชี้ให้ดูแถวของ "เสื้อยืดแขนสั้น Cotton 100%" สต็อกลดลงจาก 50 เหลือ <strong>47 ชิ้น</strong> ตรงตามที่กวางกดสั่งซื้อไป 3 ชิ้นจริง และเปิดหน้าฟอร์มแก้ไข/เพิ่มสินค้าพร้อมระบบอัปโหลดรูปภาพ</li>
+                    <li><strong>ปิงปองเปิดหน้าจัดการคำสั่งซื้อ (<code>/admin/orders</code>):</strong> พบออเดอร์ล่าสุดของ "สมชาย ใจดี" อยู่บนสุด ➔ คลิกดูรายละเอียด ➔ ในกล่องอัปเดตสถานะ เปลี่ยนจาก "รอชำระเงิน" เป็น <strong>"จัดส่งแล้ว" (Shipped)</strong> แล้วกดบันทึก ➔ ป้าย Badge เปลี่ยนเป็นสีน้ำเงินทันที</li>
+                </ol>
+            </div>
+
+            <div class="speech-box mb-3">
+                <strong>โชค:</strong> "สวัสดีครับอาจารย์ ผมโชค รับผิดชอบในส่วนของ <strong>ฐานข้อมูลสินค้า และระบบจัดการสินค้าหลังบ้าน (Products Management)</strong> ครับ<br>
+                • ในฝั่ง Admin เราสามารถตรวจสอบรายการสินค้าทั้งหมดในคลังได้ โดยสต็อกจะซิงค์กับฝั่งลูกค้าแบบ Real-time อย่างที่เห็นครับ เมื่อสักครู่กวางสั่งเสื้อยืดไป 3 ตัว สต็อกในหน้าหลังบ้านนี้ก็ปรับลดลงเหลือ 47 ตัวทันทีโดยไม่ต้องรีเซ็ตระบบ<br>
+                • Admin สามารถเพิ่มสินค้าใหม่ อัปเดตจำนวนสต็อก ปรับเปลี่ยนราคา และอัปโหลดรูปภาพเข้าสู่เซิร์ฟเวอร์ได้อย่างสะดวกรวดเร็ว<br>
+                • นอกจากนี้ ผมได้พัฒนาฟังก์ชัน <strong>Thai Slug Fallback</strong> เพื่อแก้ปัญหาภาษาไทยใน URL ทำให้สินค้าที่ตั้งชื่อเป็นภาษาไทยสามารถแสดงผล URL ได้อย่างถูกต้อง สวยงาม และเป็นมิตรกับ SEO ครับ"
+            </div>
+
+            <div class="speech-box">
+                <strong>ปิงปอง:</strong> "สวัสดีครับอาจารย์ ผมปิงปอง รับผิดชอบในส่วนของ <strong>Admin Dashboard และระบบจัดการคำสั่งซื้อ (Orders Management)</strong> ครับ<br>
+                • หน้า Dashboard หลังบ้านนี้ถูกพัฒนาขึ้นเพื่อให้ผู้บริหารร้านค้าเห็นภาพรวมธุรกิจได้ทันที ทั้งยอดขายสะสม จำนวนออเดอร์ และจำนวนสมาชิก<br>
+                • และในหน้า 'จัดการคำสั่งซื้อ' แอดมินสามารถเข้ามาตรวจสอบใบสั่งซื้อของลูกค้าได้ละเอียดแบบรายบิล พร้อมทั้งอัปเดตสถานะการส่งสินค้า เช่น ตอนนี้ผมได้เปลี่ยนสถานะออเดอร์ของคุณสมชายเป็น 'จัดส่งแล้ว' เพื่อให้ลูกค้าสามารถเช็คสถานะจากฝั่งหน้าบ้านได้ทันทีครับ"
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 5: Yang -->
+    <div class="timeline-section timeline-yang">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <span class="badge bg-primary me-2"><i class="bi bi-clock me-1"></i>นาทีที่ 5:45 - 7:00</span>
+                <span class="member-badge member-yang">ผู้พูด: หยาง (Team Lead & DevOps)</span>
+            </div>
+            <span class="responsibility-tag">ระบบที่พัฒนา: Automated Tests 40/40, Auth Security, Summary</span>
+        </div>
+        <div class="speaker-card">
+            <h5 class="fw-bold text-primary mb-2">5. ตรวจสอบผลลัพธ์รอบด้าน, การทดสอบอัตโนมัติ และสรุปภาพรวม</h5>
+            
+            <div class="action-box">
+                <strong><i class="bi bi-display me-1 text-primary"></i>สิ่งที่ต้องทำบนหน้าจอ (Screen Actions):</strong>
+                <ol class="mt-1">
+                    <li><strong>สลับกลับมาที่หน้าต่างบราวเซอร์ที่ 2 (ฝั่งลูกค้าคุณสมชาย):</strong> รีเฟรชหน้า "คำสั่งซื้อ" (<code>/orders</code>) ➔ แสดงสถานะเปลี่ยนเป็นสีน้ำเงิน <strong>"จัดส่งแล้ว"</strong> ตามที่แอดมินอัปเดต</li>
+                    <li><strong>เปิดหน้าโปรไฟล์และ Auth (<code>/profile</code>, <code>/login</code>):</strong> แสดงดีไซน์ Bootstrap 5 สวยงาม การ์ดมุมมน <code>rounded-4</code> และปลอดภัยด้วย HTTPS</li>
+                    <li><strong>สลับไปหน้าต่าง Terminal:</strong> รันคำสั่ง <code>php artisan test</code> ➔ หน้าจอแสดงแถบสีเขียว <strong>PASS: 40 passed (110 assertions)</strong> ครบ 100%</li>
+                    <li><strong>เปิดหน้า "ติดต่อเรา" (<code>/contact</code>):</strong> แสดงรายชื่อและบทบาทสมาชิกในทีมทั้ง 5 คน</li>
+                </ol>
+            </div>
+
+            <div class="speech-box">
+                "กลับมาที่ฝั่งลูกค้าครับ เมื่อเรากลับมารีเฟรชหน้า 'ประวัติคำสั่งซื้อ' จะเห็นว่าสถานะคำสั่งซื้อเปลี่ยนเป็น <strong>'จัดส่งแล้ว'</strong> อย่างถูกต้อง สอดคล้องกับการทำงานแบบ End-to-End ตั้งแต่หน้าร้านจนถึงหลังบ้านครับ<br><br>
+                และเพื่อเป็นการยืนยันความสมบูรณ์และเสถียรภาพของโค้ดทั้งหมดที่พวกเราทั้ง 5 คนร่วมกันเขียนขึ้น ผมได้เขียน <strong>Automated Test Suite (PHPUnit Tests)</strong> ครอบคลุมทุกระบบหลัก ทั้งระบบความปลอดภัย ระบบสินค้า ระบบตะกร้า และระบบคำสั่งซื้อ<br><br>
+                ดังที่อาจารย์เห็นบนหน้าจอ Terminal ครับ ผลการรัน <code>php artisan test</code> <strong>ผ่านครบถ้วนทั้ง 40 Tests 110 Assertions คิดเป็น 100% เต็ม</strong> ไม่มีข้อผิดพลาดใดๆ ทั้งสิ้นครับ<br><br>
+                และระบบนี้ได้ถูก Deploy ขึ้นสู่ Cloud Production บน <strong>Render.com</strong> เชื่อมต่อกับ Cloud Database บน <strong>Supabase</strong> ทำให้ทุกคนสามารถเข้าใช้งานระบบร้านค้าออนไลน์นี้ผ่านอินเทอร์เน็ตได้จริงทุกที่ทุกเวลาครับ<br><br>
+                กลุ่ม E-Commerce ของพวกเรา ขอจบการสาธิตการทำงานของระบบไว้แต่เพียงเท่านี้ และพวกเราทุกคนพร้อมตอบข้อซักถามของอาจารย์แล้วครับ ขอขอบพระคุณครับ"
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Q&A Guide -->
+    <div class="page-break pt-4 mt-5">
+        <h3 class="fw-bold mb-3"><i class="bi bi-question-circle-fill text-primary me-2"></i>3. แนวทางการตอบคำถามอาจารย์แบบแยกรายบุคคล (Q&A Preparation)</h3>
+        
+        <div class="qa-card">
+            <div class="d-flex align-items-center mb-1">
+                <span class="member-badge member-yang me-2">หยาง (DevOps & Auth)</span>
+                <span class="qa-question">คำถาม: จัดการปัญหาด้านความปลอดภัยและระบบ Auth อย่างไรเมื่อขึ้น Cloud?</span>
+            </div>
+            <p class="qa-answer ps-3 border-start border-primary border-3">
+                <strong>คำตอบ:</strong> "เราใช้ Laravel Breeze เป็นฐาน แต่ได้ปรับแต่งให้เป็น Bootstrap 5 ทั้งหมด พร้อมตั้งค่า <code>trustProxies(at: '*')</code> และ <code>URL::forceScheme('https')</code> เพื่อให้ทำงานร่วมกับ SSL Reverse Proxy บน Render ได้อย่างปลอดภัย ป้องกันปัญหา Mixed Content และมีการเข้ารหัสรหัสผ่านด้วย Bcrypt / Argon2ID รวมทั้งมี CSRF Protection ป้องกันการโจมตีทุกฟอร์มครับ"
+            </p>
+        </div>
+
+        <div class="qa-card">
+            <div class="d-flex align-items-center mb-1">
+                <span class="member-badge member-plub me-2">พลับ (Frontend)</span>
+                <span class="qa-question">คำถาม: หน้าร้านรองรับ Responsive อย่างไร และดึงข้อมูลหมวดหมู่มาแสดงอย่างไร?</span>
+            </div>
+            <p class="qa-answer ps-3 border-start border-info border-3">
+                <strong>คำตอบ:</strong> "เราใช้ Grid System ของ Bootstrap 5 (<code>col-lg-*</code>, <code>col-md-*</code>) ร่วมกับ Custom CSS ทำให้หน้าเว็บปรับขนาดตามอุปกรณ์ทั้งมือถือและคอมพิวเตอร์อย่างสวยงาม ส่วนหมวดหมู่สินค้า เราใช้ Eloquent Query <code>Category::withCount('products')->get()</code> ทำให้ดึงหมวดหมู่พร้อมจำนวนสินค้าจริงมาแสดงได้ใน Query เดียว ช่วยลดปัญหา N+1 Query ครับ"
+            </p>
+        </div>
+
+        <div class="qa-card">
+            <div class="d-flex align-items-center mb-1">
+                <span class="member-badge member-chok me-2">โชค (Products)</span>
+                <span class="qa-question">คำถาม: แก้ปัญหาเรื่องรูปภาพสินค้าและการตั้งชื่อภาษาไทยอย่างไร?</span>
+            </div>
+            <p class="qa-answer ps-3 border-start border-warning border-3">
+                <strong>คำตอบ:</strong> "สำหรับการอัปโหลดรูปภาพ เราเขียนโค้ดตรวจสอบและสร้างโฟลเดอร์ <code>public/images/products</code> อัตโนมัติ พร้อมตั้งชื่อไฟล์ใหม่ด้วย <code>time().'_'.uniqid()</code> ป้องกันชื่อไฟล์ซ้ำ ส่วนชื่อภาษาไทย ฟังก์ชัน <code>Str::slug()</code> ของ Laravel จะคืนค่าว่าง เราจึงเขียน Fallback Logic ให้สร้าง slug แบบ <code>product-</code> ตามด้วยเวลา และตรวจสอบความซ้ำใน DB เพื่อให้ได้ URL ที่ไม่ชนกันครับ"
+            </p>
+        </div>
+
+        <div class="qa-card">
+            <div class="d-flex align-items-center mb-1">
+                <span class="member-badge member-kwang me-2">กวาง (Cart & Orders)</span>
+                <span class="qa-question">คำถาม: ถ้ามีลูกค้ากดสั่งซื้อสินค้าชิ้นสุดท้ายพร้อมกัน 2 คน จะเกิดอะไรขึ้น?</span>
+            </div>
+            <p class="qa-answer ps-3 border-start border-success border-3">
+                <strong>คำตอบ:</strong> "ระบบของเราใช้ <strong>Database Transaction (<code>DB::transaction</code>)</strong> ในการสั่งซื้อครับ เมื่อลูกค้ากดสั่งซื้อ ระบบจะตรวจเช็คสต็อก ณ เสี้ยววินาทีนั้น หากสต็อกไม่เพียงพอ ระบบจะโยน Exception และแจ้งเตือนลูกค้าว่าสินค้าไม่พอ พร้อม Rollback ยกเลิกรายการสั่งซื้อทั้งหมดทันที ทำให้สต็อกไม่มีวันติดลบ และไม่เกิดข้อผิดพลาดในการตัดเงินหรือสร้างใบสั่งซื้อครับ"
+            </p>
+        </div>
+
+        <div class="qa-card">
+            <div class="d-flex align-items-center mb-1">
+                <span class="member-badge member-pingpong me-2">ปิงปอง (User & Admin)</span>
+                <span class="qa-question">คำถาม: ป้องกันไม่ให้ลูกค้าทั่วไปแอบเข้าหน้า Admin ได้อย่างไร?</span>
+            </div>
+            <p class="qa-answer ps-3 border-start border-purple border-3" style="border-color: #7c3aed !important;">
+                <strong>คำตอบ:</strong> "เราสร้าง <strong><code>AdminMiddleware</code></strong> ขึ้นมาคุ้มครอง Route กลุ่ม <code>/admin</code> ทั้งหมดครับ โดยตัว Middleware จะตรวจสอบ 2 ชั้น คือ 1. ต้องผ่านการล็อกอิน (<code>auth</code>) และ 2. เมธอด <code>$user->isAdmin()</code> ต้องคืนค่าเป็น <code>true</code> (เช็คฟิลด์ <code>is_admin == 1</code>) หากลูกค้าทั่วไปพยายามเข้า URL หลังบ้าน ระบบจะปฏิเสธและเตือน 'Unauthorized Access' ทันทีครับ"
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center text-muted small mt-5 pt-4 border-top">
+        <p class="mb-1"><strong>ระบบร้านค้าออนไลน์ (E-Commerce Web Application)</strong></p>
+        <p class="mb-0">พัฒนาโดย: หยาง (Team Lead), พลับ (Frontend), โชค (Products), กวาง (Cart & Orders), ปิงปอง (User & Admin)</p>
     </div>
 </div>
+
 </body>
 </html>
