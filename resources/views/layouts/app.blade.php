@@ -35,6 +35,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/shop') }}">สินค้า</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('contact') }}">ติดต่อเรา</a>
+                    </li>
                 </ul>
                 
                 <ul class="navbar-nav">
@@ -109,30 +112,50 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="bg-dark text-white py-4 mt-5">
+    <footer class="bg-dark text-white py-5 mt-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5><i class="bi bi-shop"></i> E-Commerce</h5>
-                    <p class="text-muted">ร้านค้าออนไลน์คุณภาพ สินค้าดี ราคาถูก</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>ลิงก์</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ url('/') }}" class="text-muted text-decoration-none">หน้าแรก</a></li>
-                        <li><a href="{{ url('/shop') }}" class="text-muted text-decoration-none">สินค้า</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>ติดต่อเรา</h5>
-                    <p class="text-muted">
-                        <i class="bi bi-envelope"></i> contact@example.com<br>
-                        <i class="bi bi-telephone"></i> 02-xxx-xxxx
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-shop text-primary"></i> E-Commerce</h5>
+                    <p class="text-muted small">ร้านค้าออนไลน์คุณภาพ สินค้าดี ราคาถูก ตอบสนองทุกความต้องการ</p>
+                    <p class="text-muted small mb-0">
+                        <i class="bi bi-geo-alt me-1"></i> เชียงใหม่ ประเทศไทย
                     </p>
                 </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold mb-3">ลิงก์</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{{ url('/') }}" class="text-muted text-decoration-none">หน้าแรก</a></li>
+                        <li class="mb-2"><a href="{{ url('/shop') }}" class="text-muted text-decoration-none">สินค้า</a></li>
+                        <li class="mb-2"><a href="{{ route('contact') }}" class="text-muted text-decoration-none">ติดต่อเรา</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-people-fill text-info me-1"></i> สมาชิกทีมพัฒนา</h5>
+                    <ul class="list-unstyled text-muted small mb-0">
+                        <li class="mb-2"><span class="badge bg-primary me-1">Team Lead</span> <strong>หยาง</strong> (DevOps & Auth)</li>
+                        <li class="mb-2"><span class="badge bg-info text-dark me-1">Frontend</span> <strong>พลับ</strong> (Home & Shop UI)</li>
+                        <li class="mb-2"><span class="badge bg-warning text-dark me-1">Products</span> <strong>โชค</strong> (Admin & Categories)</li>
+                        <li class="mb-2"><span class="badge bg-success me-1">Cart & Order</span> <strong>กวาง</strong> (Checkout & Orders)</li>
+                        <li class="mb-2"><span class="badge bg-danger me-1">User & Admin</span> <strong>ปิงปอง</strong> (Profile & Management)</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold mb-3">ติดต่อเรา</h5>
+                    <p class="text-muted small mb-3">
+                        <i class="bi bi-envelope me-1"></i> contact@example.com<br>
+                        <i class="bi bi-telephone me-1"></i> 02-xxx-xxxx
+                    </p>
+                    <a href="{{ route('contact') }}" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-chat-dots me-1"></i> หน้ารายละเอียดติดต่อ
+                    </a>
+                </div>
             </div>
-            <hr>
-            <p class="text-center text-muted mb-0">&copy; 2026 E-Commerce. All rights reserved.</p>
+            <hr class="border-secondary my-4">
+            <div class="d-flex flex-wrap justify-content-between align-items-center text-muted small">
+                <span>&copy; 2026 E-Commerce. All rights reserved.</span>
+                <span>พัฒนาโดย <strong>ทีม E-Commerce</strong> (หยาง, พลับ, โชค, กวาง, ปิงปอง)</span>
+            </div>
         </div>
     </footer>
 

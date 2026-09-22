@@ -52,4 +52,16 @@ class FrontendTest extends TestCase
         $response->assertSee('เสื้อยืดแขนสั้น Cotton 100%');
         $response->assertSee('350.00');
     }
+
+    public function test_contact_page_can_be_rendered_and_shows_team_members(): void
+    {
+        $response = $this->get('/contact');
+        $response->assertStatus(200);
+        $response->assertSee('ติดต่อเรา');
+        $response->assertSee('หยาง');
+        $response->assertSee('พลับ');
+        $response->assertSee('โชค');
+        $response->assertSee('กวาง');
+        $response->assertSee('ปิงปอง');
+    }
 }

@@ -19,6 +19,17 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{slug}', [ShopController::class, 'show'])->name('shop.show');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+Route::post('/contact', function (\Illuminate\Http\Request $request) {
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'message' => 'required|string|max:1000',
+    ]);
+    return back()->with('success', 'ขอบคุณสำหรับข้อความ! ทีมงานได้รับข้อความเรียบร้อยแล้ว');
+})->name('contact.send');
 
 // ============================================
 // 🔐 Auth Routes (หยาง) - มาจาก Breeze อัตโนมัติ
