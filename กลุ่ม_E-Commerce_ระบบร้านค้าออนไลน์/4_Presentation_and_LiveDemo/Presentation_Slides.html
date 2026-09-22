@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สไลด์การนำเสนอผลงาน (Presentation Slides) - E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f0f2f5; color: #333; }
+        .slide { max-width: 900px; min-height: 520px; background: white; padding: 45px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin: 30px auto; page-break-after: always; display: flex; flex-direction: column; justify-content: space-between; }
+        .slide-header { border-bottom: 2px solid #0d6efd; padding-bottom: 12px; margin-bottom: 25px; }
+        .slide-footer { border-top: 1px solid #dee2e6; padding-top: 12px; font-size: 0.85rem; color: #6c757d; display: flex; justify-content: space-between; margin-top: 25px; }
+        .badge-role { font-size: 0.9rem; padding: 6px 12px; }
+        @media print {
+            body { background: white; }
+            .slide { box-shadow: none; margin: 0; padding: 30px; border-radius: 0; min-height: 100vh; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="text-center my-3 no-print">
+    <button class="btn btn-primary px-4 py-2" onclick="window.print()">🖨️ พิมพ์สไลด์ทั้งหมดเป็น PDF</button>
+</div>
+
+<!-- Slide 1 -->
+<div class="slide text-center justify-content-center">
+    <div>
+        <span class="badge bg-primary px-3 py-2 fs-6 mb-3">Project Presentation</span>
+        <h1 class="display-5 fw-bold text-dark mb-3">ระบบร้านค้าออนไลน์ (E-Commerce)</h1>
+        <p class="fs-5 text-muted mb-4">"ช้อปง่าย สะดวก รวดเร็ว ด้วยระบบจัดการครบวงจร"</p>
+        <div class="d-flex justify-content-center gap-2 flex-wrap mb-4">
+            <span class="badge bg-dark badge-role">หยาง (Team Lead / Auth)</span>
+            <span class="badge bg-info text-dark badge-role">พลับ (Frontend)</span>
+            <span class="badge bg-warning text-dark badge-role">โชค (Products)</span>
+            <span class="badge bg-success badge-role">กวาง (Cart & Orders)</span>
+            <span class="badge bg-danger badge-role">ปิงปอง (User & Admin)</span>
+        </div>
+        <p class="text-muted small">มหาวิทยาลัยราชภัฏเชียงใหม่</p>
+    </div>
+    <div class="slide-footer">
+        <span>E-Commerce Presentation</span>
+        <span>Slide 1 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide">
+    <div>
+        <div class="slide-header">
+            <h3 class="fw-bold text-primary mb-0"><i class="bi bi-lightbulb me-2"></i>ที่มาและความสำคัญ (Motivation & Objectives)</h3>
+        </div>
+        <div class="row g-4 my-auto">
+            <div class="col-md-6">
+                <div class="card h-100 p-3 bg-light border-0">
+                    <h5 class="fw-bold text-danger"><i class="bi bi-exclamation-triangle me-2"></i>ปัญหาในระบบทั่วไป</h5>
+                    <ul class="text-muted mt-2">
+                        <li>ระบบค้นหาและกรองสินค้าทำงานช้าหรือไม่แม่นยำ</li>
+                        <li>สต็อกสินค้าไม่ตัดจริงเมื่อมีคำสั่งซื้อพร้อมกัน</li>
+                        <li>ประวัติราคาสินค้าในออเดอร์คลาดเคลื่อนเมื่อร้านค้าปรับราคา</li>
+                        <li>ระบบหลังบ้านใช้งานซับซ้อน อัปเดตสถานะยาก</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 p-3 bg-light border-0">
+                    <h5 class="fw-bold text-success"><i class="bi bi-check-circle me-2"></i>เป้าหมายของโครงการ</h5>
+                    <ul class="text-muted mt-2">
+                        <li>พัฒนาระบบช้อปปิ้งที่ตอบสนองไว ค้นหาและกรองราคาได้ทันที</li>
+                        <li>มีระบบตัดสต็อกแบบ Real-time ด้วย Database Transactions</li>
+                        <li>ระบบบันทึกราคาแบบ Snapshot สำหรับความถูกต้องทางบัญชี</li>
+                        <li>มี Admin Dashboard สรุปยอดขายและจัดการสินค้า/ออเดอร์ได้ครบวงจร</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>E-Commerce Presentation</span>
+        <span>Slide 2 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide">
+    <div>
+        <div class="slide-header">
+            <h3 class="fw-bold text-primary mb-0"><i class="bi bi-cpu me-2"></i>สถาปัตยกรรม & เทคโนโลยี (Tech Stack)</h3>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="card text-center p-3 h-100">
+                    <i class="bi bi-hdd-rack text-primary fs-1 mb-2"></i>
+                    <h5 class="fw-bold">Backend</h5>
+                    <p class="text-muted small mb-0">Laravel 11 (PHP 8.2+)<br>MVC Architecture<br>Laravel Breeze (Auth)</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center p-3 h-100">
+                    <i class="bi bi-database text-success fs-1 mb-2"></i>
+                    <h5 class="fw-bold">Database</h5>
+                    <p class="text-muted small mb-0">Supabase (PostgreSQL)<br>/ SQLite Database<br>Eloquent ORM</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center p-3 h-100">
+                    <i class="bi bi-window-fullscreen text-info fs-1 mb-2"></i>
+                    <h5 class="fw-bold">Frontend</h5>
+                    <p class="text-muted small mb-0">Blade Templates<br>Bootstrap 5 + Icons<br>Responsive UI</p>
+                </div>
+            </div>
+        </div>
+        <div class="card p-3 mt-3 bg-light border-0">
+            <h6 class="fw-bold mb-1"><i class="bi bi-git me-2 text-danger"></i>Git Workflow ร่วมกัน 5 คน:</h6>
+            <p class="text-muted small mb-0">แยกพัฒนาผ่าน 5 Feature Branches: <code>feature/auth</code>, <code>feature/frontend</code>, <code>feature/products</code>, <code>feature/cart-orders</code>, <code>feature/admin</code> และรวมผ่าน <code>develop</code> สู่ <code>main</code></p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>E-Commerce Presentation</span>
+        <span>Slide 3 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide">
+    <div>
+        <div class="slide-header">
+            <h3 class="fw-bold text-primary mb-0"><i class="bi bi-diagram-3 me-2"></i>การออกแบบฐานข้อมูล (Database Schema & ERD)</h3>
+        </div>
+        <p class="text-muted">ระบบประกอบด้วย 6 ตารางข้อมูลหลัก ที่มีความสัมพันธ์กันอย่างถูกต้อง:</p>
+        <div class="table-responsive">
+            <table class="table table-bordered table-sm text-center">
+                <thead class="table-dark">
+                    <tr><th>ตาราง</th><th>หน้าที่หลัก</th><th>ความสัมพันธ์ (Relationships)</th></tr>
+                </thead>
+                <tbody class="small text-start">
+                    <tr><td><code>users</code></td><td>จัดเก็บข้อมูลผู้ใช้งานและผู้ดูแลระบบ</td><td>1 : N กับ <code>orders</code> และ 1 : N กับ <code>carts</code></td></tr>
+                    <tr><td><code>categories</code></td><td>หมวดหมู่สินค้า 7 หมวดหมู่หลัก</td><td>1 : N กับ <code>products</code></td></tr>
+                    <tr><td><code>products</code></td><td>ข้อมูลสินค้า ราคา สต็อก รูปภาพ</td><td>N : 1 กับ <code>categories</code>, 1 : N กับ <code>order_items</code></td></tr>
+                    <tr><td><code>carts</code></td><td>ตะกร้าสินค้าของผู้ใช้แต่ละคน</td><td>M : N ระหว่าง <code>users</code> และ <code>products</code></td></tr>
+                    <tr><td><code>orders</code></td><td>คำสั่งซื้อ ยอดรวมเงิน และสถานะจัดส่ง</td><td>N : 1 กับ <code>users</code>, 1 : N กับ <code>order_items</code></td></tr>
+                    <tr><td><code>order_items</code></td><td>รายการสินค้าในคำสั่งซื้อ (Snapshot Price)</td><td>N : 1 กับ <code>orders</code> และ <code>products</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>E-Commerce Presentation</span>
+        <span>Slide 4 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 5 -->
+<div class="slide">
+    <div>
+        <div class="slide-header">
+            <h3 class="fw-bold text-primary mb-0"><i class="bi bi-cart me-2"></i>ฟังก์ชันฝั่งลูกค้า (Customer Journey)</h3>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="card p-3 h-100 border-start border-primary border-4">
+                    <h6 class="fw-bold text-dark">1. หน้าแรก & หน้าร้านค้า</h6>
+                    <p class="text-muted small mb-0">แสดงแบนเนอร์, หมวดหมู่สินค้าพร้อมนับจำนวน, สินค้าใหม่ล่าสุด, ระบบค้นหาตามชื่อ และกรองตามราคา</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100 border-start border-info border-4">
+                    <h6 class="fw-bold text-dark">2. หน้ารายละเอียด & ตะกร้าสินค้า</h6>
+                    <p class="text-muted small mb-0">แสดงสต็อกจริง ปรับจำนวนชิ้น กดหยิบใส่ตะกร้า แสดงตัวเลข Badge สีแดงบน Navbar แบบไดนามิก</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100 border-start border-success border-4">
+                    <h6 class="fw-bold text-dark">3. การสั่งซื้อสินค้า (Checkout)</h6>
+                    <p class="text-muted small mb-0">กรอกชื่อ ที่อยู่จัดส่ง และเบอร์โทร กดสั่งซื้อแล้วระบบตัดสต็อกสินค้าในคลังแบบอัตโนมัติทันที</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100 border-start border-warning border-4">
+                    <h6 class="fw-bold text-dark">4. ประวัติคำสั่งซื้อ & โปรไฟล์</h6>
+                    <p class="text-muted small mb-0">ติดตามสถานะออเดอร์ด้วยสีที่เข้าใจง่าย ดูรายละเอียด และแก้ไขข้อมูลโปรไฟล์ส่วนตัวได้</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>E-Commerce Presentation</span>
+        <span>Slide 5 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 6 -->
+<div class="slide">
+    <div>
+        <div class="slide-header">
+            <h3 class="fw-bold text-danger mb-0"><i class="bi bi-shield-lock me-2"></i>ฟังก์ชันฝั่งผู้ดูแลระบบ (Admin Panel)</h3>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="card p-3 h-100 bg-light border-0">
+                    <h6 class="fw-bold text-danger"><i class="bi bi-speedometer2 me-1"></i>แดชบอร์ดสรุปสถิติ</h6>
+                    <p class="text-muted small mb-0">สรุปยอดขายรวม, จำนวนคำสั่งซื้อ, สินค้าทั้งหมด, สมาชิกลูกค้า และตารางออเดอร์ล่าสุดแบบ Real-time</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100 bg-light border-0">
+                    <h6 class="fw-bold text-dark"><i class="bi bi-boxes me-1"></i>จัดการสินค้า & หมวดหมู่</h6>
+                    <p class="text-muted small mb-0">เพิ่ม แก้ไข ลบสินค้า อัปโหลดรูปภาพ ปรับราคาสต็อก และระบบสร้าง URL Slug ภาษาไทยอัตโนมัติ</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100 bg-light border-0">
+                    <h6 class="fw-bold text-primary"><i class="bi bi-truck me-1"></i>จัดการคำสั่งซื้อ</h6>
+                    <p class="text-muted small mb-0">ตรวจสอบรายการสินค้าที่ลูกค้าสั่ง ข้อมูลจัดส่ง และเปลี่ยนสถานะคำสั่งซื้อ (รอชำระ, จัดส่ง, สำเร็จ)</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 h-100 bg-light border-0">
+                    <h6 class="fw-bold text-success"><i class="bi bi-people me-1"></i>จัดการสมาชิก</h6>
+                    <p class="text-muted small mb-0">ดูรายชื่อสมาชิกทั้งหมด แก้ไขข้อมูล และปรับบทบาท User / Admin ได้อย่างยืดหยุ่น</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>E-Commerce Presentation</span>
+        <span>Slide 6 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 7 -->
+<div class="slide">
+    <div>
+        <div class="slide-header">
+            <h3 class="fw-bold text-primary mb-0"><i class="bi bi-gear-fill me-2"></i>ไฮไลท์ทางเทคนิค (Technical Highlights)</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item px-0 py-2">
+                <strong>1. Database Transactions (<code>DB::transaction</code>):</strong> ป้องกันปัญหาสต็อกสินค้าติดลบเมื่อมีการกดสั่งซื้อพร้อมกันหลายคน
+            </li>
+            <li class="list-group-item px-0 py-2">
+                <strong>2. Snapshot Pricing Pattern:</strong> เก็บราคาและชื่อสินค้า ณ เวลาสั่งซื้อใน <code>order_items</code> ไม่ให้กระทบยอดเงินย้อนหลัง
+            </li>
+            <li class="list-group-item px-0 py-2">
+                <strong>3. Thai Unicode Slug Fallback:</strong> ป้องกันปัญหาสร้าง Slug ว่างเปล่าสำหรับภาษาไทย พร้อมระบบตรวจสอบความซ้ำซ้อน
+            </li>
+            <li class="list-group-item px-0 py-2">
+                <strong>4. Automated Directory Generator:</strong> ตรวจสอบและสร้างโฟลเดอร์สำหรับจัดเก็บรูปภาพสินค้าอัตโนมัติเมื่อมีการอัปโหลด
+            </li>
+        </ul>
+    </div>
+    <div class="slide-footer">
+        <span>E-Commerce Presentation</span>
+        <span>Slide 7 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 8 -->
+<div class="slide">
+    <div>
+        <div class="slide-header">
+            <h3 class="fw-bold text-success mb-0"><i class="bi bi-patch-check-fill me-2"></i>การทดสอบคุณภาพระบบ (Quality Assurance)</h3>
+        </div>
+        <div class="card bg-success text-white p-4 text-center my-3 shadow-sm">
+            <h2 class="display-6 fw-bold mb-1">40 / 40 Tests Passed (100%)</h2>
+            <p class="mb-0 fs-5">110 Assertions ผ่านการทดสอบทั้งหมดโดยไม่มีข้อผิดพลาด</p>
+        </div>
+        <div class="row g-2 text-muted small">
+            <div class="col-6">✔ Authentication & Registration Tests</div>
+            <div class="col-6">✔ Profile & Password Management Tests</div>
+            <div class="col-6">✔ Frontend, Search & Category Filter Tests</div>
+            <div class="col-6">✔ Cart & Order Transaction Checkout Tests</div>
+            <div class="col-6">✔ Admin Product CRUD & Image Upload Tests</div>
+            <div class="col-6">✔ Order Status Update & Stock Reduction Tests</div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>E-Commerce Presentation</span>
+        <span>Slide 8 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 9 -->
+<div class="slide">
+    <div>
+        <div class="slide-header">
+            <h3 class="fw-bold text-primary mb-0"><i class="bi bi-display me-2"></i>ภาพรวมการสาธิตการทำงานจริง (Live Demo Flow)</h3>
+        </div>
+        <div class="row g-3">
+            <div class="col-12">
+                <div class="p-3 bg-light rounded border-start border-primary border-4">
+                    <strong>สเต็ป 1 (พลับ):</strong> เปิดหน้าแรก หน้าร้าน ค้นหาสินค้า กรองราคา และดูรายละเอียด
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="p-3 bg-light rounded border-start border-success border-4">
+                    <strong>สเต็ป 2 (กวาง):</strong> เพิ่มสินค้าลงตะกร้า ปรับจำนวน ไปหน้า Checkout กรอกที่อยู่ และสั่งซื้อ (ตัดสต็อก)
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="p-3 bg-light rounded border-start border-danger border-4">
+                    <strong>สเต็ป 3 (โชค & ปิงปอง):</strong> สลับไปหน้า Admin Dashboard จัดการสินค้า และเปลี่ยนสถานะคำสั่งซื้อเป็น "จัดส่งแล้ว"
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="p-3 bg-light rounded border-start border-info border-4">
+                    <strong>สเต็ป 4 (หยาง):</strong> สลับกลับมาดูลูกค้า สถานะอัปเดตทันที แสดงหน้าติดต่อเรา และผลรัน Test 100%
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>E-Commerce Presentation</span>
+        <span>Slide 9 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 10 -->
+<div class="slide text-center justify-content-center">
+    <div>
+        <h1 class="display-4 fw-bold text-primary mb-3">ขอบคุณครับ</h1>
+        <p class="fs-4 text-muted mb-4">พร้อมตอบข้อซักถามและรับคำแนะนำจากอาจารย์ทุกท่าน (Q&A)</p>
+        <div class="card p-3 max-w-md mx-auto d-inline-block bg-light border-0">
+            <strong>GitHub Repository:</strong><br>
+            <a href="https://github.com/YangNobody12/e-commerce" class="text-decoration-none">https://github.com/YangNobody12/e-commerce</a>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>E-Commerce Presentation</span>
+        <span>Slide 10 / 10</span>
+    </div>
+</div>
+
+</body>
+</html>
