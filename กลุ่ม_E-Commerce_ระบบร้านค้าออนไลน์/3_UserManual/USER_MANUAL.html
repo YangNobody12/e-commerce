@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คู่มือการใช้งานโปรแกรม (User Manual) - E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8f9fa; color: #333; }
+        .container { max-width: 960px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-top: 30px; margin-bottom: 50px; }
+        .step-badge { width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; background: #0d6efd; color: white; margin-right: 8px; }
+        .card-feature { border-left: 4px solid #0d6efd; background: #fdfdfd; }
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; padding: 0; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+        <div>
+            <h1 class="fw-bold mb-1">📖 คู่มือการใช้งานโปรแกรมโดยสังเขป (User Manual)</h1>
+            <p class="text-muted mb-0"><strong>โครงการ:</strong> ระบบร้านค้าออนไลน์ (E-Commerce Web Application) | <strong>URL:</strong> <code>http://127.0.0.1:8000</code></p>
+        </div>
+        <button class="btn btn-primary no-print" onclick="window.print()">🖨️ พิมพ์คู่มือเป็น PDF</button>
+    </div>
+
+    <div class="alert alert-info py-3 mb-4">
+        <h5 class="fw-bold mb-2"><i class="bi bi-key-fill me-2"></i>ข้อมูลบัญชีสำหรับทดสอบระบบ (Test Accounts)</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <strong><i class="bi bi-shield-lock-fill text-danger me-1"></i>ผู้ดูแลระบบ (Admin):</strong><br>
+                อีเมล: <code>admin@example.com</code><br>
+                รหัสผ่าน: <code>password</code>
+            </div>
+            <div class="col-md-6">
+                <strong><i class="bi bi-person-fill text-primary me-1"></i>ลูกค้าทั่วไป (User):</strong><br>
+                อีเมล: <code>user@example.com</code><br>
+                รหัสผ่าน: <code>password</code>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="fw-bold text-primary mt-4 mb-3 border-bottom pb-2">1. คู่มือสำหรับลูกค้า / ผู้ใช้งานทั่วไป (Customer Guide)</h3>
+    
+    <div class="card p-3 mb-3 card-feature shadow-sm">
+        <h5 class="fw-bold text-dark"><span class="step-badge">1</span> การเลือกชมสินค้าและค้นหา (Home & Shop)</h5>
+        <p class="mb-1 text-muted">เข้าสู่หน้าแรก <code>/</code> เพื่อดูสินค้าแนะนำ หรือกดเมนู <strong>"สินค้า"</strong> (<code>/shop</code>) เพื่อเข้าสู่หน้ารายการสินค้าทั้งหมด</p>
+        <ul class="text-muted small mb-0">
+            <li><strong>ค้นหาด้วยชื่อ:</strong> กรอกคำค้นหาในช่องค้นหาแล้วกด "ค้นหา"</li>
+            <li><strong>กรองหมวดหมู่:</strong> คลิกเลือกหมวดหมู่ที่ต้องการจากแถบด้านข้าง</li>
+            <li><strong>กรองช่วงราคา:</strong> กำหนดราคาต่ำสุดและราคาสูงสุด</li>
+            <li><strong>เรียงลำดับ:</strong> เรียงตามล่าสุด, ราคา ต่ำ-สูง, ราคา สูง-ต่ำ, หรือชื่อ ก-ฮ</li>
+        </ul>
+    </div>
+
+    <div class="card p-3 mb-3 card-feature shadow-sm">
+        <h5 class="fw-bold text-dark"><span class="step-badge">2</span> การดูรายละเอียดและหยิบใส่ตะกร้า (Product Detail & Cart)</h5>
+        <p class="mb-1 text-muted">คลิกที่สินค้าเพื่อดูรูปภาพขนาดใหญ่ รายละเอียด สต็อกคงเหลือ และราคา</p>
+        <ul class="text-muted small mb-0">
+            <li>กดปุ่มบวก/ลบ เพื่อเลือกจำนวนชิ้นที่ต้องการซื้อ</li>
+            <li>กดปุ่ม <strong>"เพิ่มลงตะกร้า"</strong> เพื่อบรรจุสินค้าลงในตะกร้า</li>
+            <li>ดูจำนวนสินค้าในตะกร้าได้ตลอดเวลาจากไอคอนตะกร้าสีแดงบน Navbar</li>
+            <li>ในหน้าตะกร้า (<code>/cart</code>) สามารถปรับจำนวนชิ้น หรือกดลบรายการสินค้าได้</li>
+        </ul>
+    </div>
+
+    <div class="card p-3 mb-3 card-feature shadow-sm">
+        <h5 class="fw-bold text-dark"><span class="step-badge">3</span> การสั่งซื้อสินค้าและชำระเงิน (Checkout)</h5>
+        <p class="mb-1 text-muted">ในหน้าตะกร้า กดปุ่ม <strong>"ไปหน้าสั่งซื้อสินค้า"</strong> (<code>/checkout</code>)</p>
+        <ul class="text-muted small mb-0">
+            <li>ตรวจสอบรายการสินค้าและยอดรวมเงินที่ต้องชำระ</li>
+            <li>กรอกชื่อผู้รับพัสดุ เบอร์โทรศัพท์ติดต่อ ที่อยู่จัดส่ง และหมายเหตุ</li>
+            <li>กดปุ่ม <strong>"ยืนยันการสั่งซื้อ"</strong> เพื่อสร้างคำสั่งซื้อและตัดสต็อกสินค้าในคลังแบบอัตโนมัติ</li>
+        </ul>
+    </div>
+
+    <div class="card p-3 mb-3 card-feature shadow-sm">
+        <h5 class="fw-bold text-dark"><span class="step-badge">4</span> การติดตามสถานะคำสั่งซื้อ & โปรไฟล์ (Orders & Profile)</h5>
+        <p class="mb-1 text-muted">คลิกชื่อผู้ใช้ด้านบนขวา ➔ เลือก <strong>"คำสั่งซื้อ"</strong> (<code>/orders</code>)</p>
+        <ul class="text-muted small mb-0">
+            <li>ดูประวัติออเดอร์ทั้งหมด พร้อมรหัสอ้างอิง เช่น <code>ORD-20260922-XXXX</code></li>
+            <li>ติดตามสถานะคำสั่งซื้อ: รอชำระเงิน (Pending), กำลังดำเนินการ (Processing), จัดส่งแล้ว (Shipped), สำเร็จแล้ว (Delivered)</li>
+            <li>สามารถคลิก <strong>"โปรไฟล์"</strong> เพื่อแก้ไขข้อมูลส่วนตัวหรือเปลี่ยนรหัสผ่านได้ตลอดเวลา</li>
+        </ul>
+    </div>
+
+    <h3 class="fw-bold text-danger mt-5 mb-3 border-bottom pb-2">2. คู่มือสำหรับผู้ดูแลระบบ (Admin Panel Guide)</h3>
+
+    <div class="card p-3 mb-3 shadow-sm border-start border-danger border-4">
+        <h5 class="fw-bold text-dark"><i class="bi bi-speedometer2 text-danger me-2"></i>หน้าภาพรวมสถิติ (Admin Dashboard - <code>/admin</code>)</h5>
+        <p class="text-muted small mb-0">แสดงการ์ดสรุปผลยอดขายรวม, จำนวนคำสั่งซื้อ, สินค้าทั้งหมด, สมาชิกลูกค้า และตารางแสดงออเดอร์ล่าสุด 5 รายการ</p>
+    </div>
+
+    <div class="card p-3 mb-3 shadow-sm border-start border-danger border-4">
+        <h5 class="fw-bold text-dark"><i class="bi bi-box-seam text-danger me-2"></i>การจัดการสินค้าและหมวดหมู่ (Products & Categories)</h5>
+        <ul class="text-muted small mb-0">
+            <li><strong>จัดการหมวดหมู่ (<code>/admin/categories</code>):</strong> เพิ่ม ลบ แก้ไขชื่อหมวดหมู่และรูปภาพ พร้อมระบบสร้าง URL Slug ภาษาไทยอัตโนมัติ</li>
+            <li><strong>จัดการสินค้า (<code>/admin/products</code>):</strong> เพิ่มสินค้าใหม่พร้อมเลือกหมวดหมู่ กำหนดราคา สต็อก อัปโหลดรูปภาพ และเปิด/ปิดสถานะวางจำหน่าย</li>
+        </ul>
+    </div>
+
+    <div class="card p-3 mb-3 shadow-sm border-start border-danger border-4">
+        <h5 class="fw-bold text-dark"><i class="bi bi-receipt text-danger me-2"></i>การจัดการคำสั่งซื้อ (Orders Management - <code>/admin/orders</code>)</h5>
+        <ul class="text-muted small mb-0">
+            <li>ตรวจสอบรายการคำสั่งซื้อของลูกค้าทั้งหมดในระบบ</li>
+            <li>คลิก "ดูรายละเอียด" เพื่อดูสินค้าที่ลูกค้าสั่งและข้อมูลที่อยู่จัดส่ง</li>
+            <li><strong>อัปเดตสถานะคำสั่งซื้อ:</strong> ปรับสถานะเป็น "กำลังดำเนินการ", "จัดส่งแล้ว", "สำเร็จแล้ว" หรือ "ยกเลิก" ได้ทันที</li>
+        </ul>
+    </div>
+
+    <div class="card p-3 mb-3 shadow-sm border-start border-danger border-4">
+        <h5 class="fw-bold text-dark"><i class="bi bi-people text-danger me-2"></i>การจัดการผู้ใช้งาน (Users Management - <code>/admin/users</code>)</h5>
+        <p class="text-muted small mb-0">ดูรายชื่อสมาชิกทั้งหมด ปรับแต่งข้อมูล หรือกำหนดสิทธิ์การเป็น Admin ให้กับสมาชิก</p>
+    </div>
+</div>
+</body>
+</html>

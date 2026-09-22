@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เอกสารออกแบบระบบ & ER-Diagram - ระบบร้านค้าออนไลน์ E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default'});</script>
+    <style>
+        body { font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8f9fa; color: #333; }
+        .container { max-width: 960px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-top: 30px; margin-bottom: 50px; }
+        .mermaid { background: #fafafa; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; }
+        table { font-size: 0.95rem; }
+        th { background-color: #212529 !important; color: white !important; }
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; padding: 0; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+        <div>
+            <h1 class="fw-bold mb-1">📐 เอกสารออกแบบระบบ (System Design)</h1>
+            <p class="text-muted mb-0"><strong>โครงการ:</strong> ระบบร้านค้าออนไลน์ (E-Commerce Web Application) | <strong>ทีม:</strong> หยาง, พลับ, โชค, กวาง, ปิงปอง</p>
+        </div>
+        <button class="btn btn-primary no-print" onclick="window.print()">🖨️ พิมพ์เป็น PDF</button>
+    </div>
+
+    <h3 class="fw-bold mt-4 mb-3 text-primary">1. แผนภาพความสัมพันธ์ของข้อมูล (Entity-Relationship Diagram: ERD)</h3>
+    <div class="mermaid mb-5">
+erDiagram
+    USERS ||--o{ CARTS : "มีในตะกร้า"
+    USERS ||--o{ ORDERS : "สั่งซื้อ"
+    CATEGORIES ||--o{ PRODUCTS : "จัดหมวดหมู่"
+    PRODUCTS ||--o{ CARTS : "ถูกเพิ่มลง"
+    PRODUCTS ||--o{ ORDER_ITEMS : "อยู่ใน"
+    ORDERS ||--|{ ORDER_ITEMS : "ประกอบด้วย"
+
+    USERS {
+        bigint id PK
+        string name
+        string email UK
+        string password
+        enum role
+        string phone
+        text address
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CATEGORIES {
+        bigint id PK
+        string name
+        string slug UK
+        text description
+        string image
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PRODUCTS {
+        bigint id PK
+        bigint category_id FK
+        string name
+        string slug UK
+        text description
+        decimal price
+        integer stock
+        string image
+        boolean is_active
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CARTS {
+        bigint id PK
+        bigint user_id FK
+        bigint product_id FK
+        integer quantity
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ORDERS {
+        bigint id PK
+        bigint user_id FK
+        string order_number UK
+        decimal total_amount
+        enum status
+        string shipping_name
+        text shipping_address
+        string shipping_phone
+        text note
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ORDER_ITEMS {
+        bigint id PK
+        bigint order_id FK
+        bigint product_id FK
+        string product_name
+        decimal price
+        integer quantity
+        decimal subtotal
+        timestamp created_at
+        timestamp updated_at
+    }
+    </div>
+
+    <h3 class="fw-bold mt-5 mb-3 text-primary">2. คำอธิบายโครงสร้างตารางข้อมูล (Data Dictionary)</h3>
+
+    <h5 class="fw-bold mt-4">2.1 ตาราง <code>users</code> (ข้อมูลผู้ใช้และแอดมิน)</h5>
+    <table class="table table-bordered table-striped mb-4">
+        <thead><tr><th>ชื่อคอลัมน์</th><th>ชนิดข้อมูล</th><th>คุณสมบัติ</th><th>คำอธิบาย</th></tr></thead>
+        <tbody>
+            <tr><td><code>id</code></td><td>BIGINT</td><td>PK, Auto Increment</td><td>รหัสผู้ใช้งาน</td></tr>
+            <tr><td><code>name</code></td><td>VARCHAR(255)</td><td>NOT NULL</td><td>ชื่อ - นามสกุล</td></tr>
+            <tr><td><code>email</code></td><td>VARCHAR(255)</td><td>NOT NULL, UNIQUE</td><td>อีเมลสำหรับเข้าสู่ระบบ</td></tr>
+            <tr><td><code>password</code></td><td>VARCHAR(255)</td><td>NOT NULL</td><td>รหัสผ่าน (เข้ารหัสด้วย Bcrypt)</td></tr>
+            <tr><td><code>role</code></td><td>ENUM</td><td>NOT NULL, default: 'user'</td><td>สิทธิ์ผู้ใช้: 'user' หรือ 'admin'</td></tr>
+            <tr><td><code>phone</code></td><td>VARCHAR(20)</td><td>NULL</td><td>เบอร์โทรศัพท์</td></tr>
+            <tr><td><code>address</code></td><td>TEXT</td><td>NULL</td><td>ที่อยู่จัดส่งเริ่มต้น</td></tr>
+            <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่สร้าง</td></tr>
+            <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่แก้ไข</td></tr>
+        </tbody>
+    </table>
+
+    <h5 class="fw-bold mt-4">2.2 ตาราง <code>categories</code> (หมวดหมู่สินค้า)</h5>
+    <table class="table table-bordered table-striped mb-4">
+        <thead><tr><th>ชื่อคอลัมน์</th><th>ชนิดข้อมูล</th><th>คุณสมบัติ</th><th>คำอธิบาย</th></tr></thead>
+        <tbody>
+            <tr><td><code>id</code></td><td>BIGINT</td><td>PK, Auto Increment</td><td>รหัสหมวดหมู่</td></tr>
+            <tr><td><code>name</code></td><td>VARCHAR(255)</td><td>NOT NULL</td><td>ชื่อหมวดหมู่</td></tr>
+            <tr><td><code>slug</code></td><td>VARCHAR(255)</td><td>NOT NULL, UNIQUE</td><td>URL Slug</td></tr>
+            <tr><td><code>description</code></td><td>TEXT</td><td>NULL</td><td>คำอธิบายหมวดหมู่</td></tr>
+            <tr><td><code>image</code></td><td>VARCHAR(255)</td><td>NULL</td><td>รูปภาพประจำหมวดหมู่</td></tr>
+            <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่สร้าง</td></tr>
+            <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่แก้ไข</td></tr>
+        </tbody>
+    </table>
+
+    <h5 class="fw-bold mt-4">2.3 ตาราง <code>products</code> (ข้อมูลสินค้า)</h5>
+    <table class="table table-bordered table-striped mb-4">
+        <thead><tr><th>ชื่อคอลัมน์</th><th>ชนิดข้อมูล</th><th>คุณสมบัติ</th><th>คำอธิบาย</th></tr></thead>
+        <tbody>
+            <tr><td><code>id</code></td><td>BIGINT</td><td>PK, Auto Increment</td><td>รหัสสินค้า</td></tr>
+            <tr><td><code>category_id</code></td><td>BIGINT</td><td>FK, NOT NULL</td><td>เชื่อมไปยัง <code>categories.id</code> (Cascade)</td></tr>
+            <tr><td><code>name</code></td><td>VARCHAR(255)</td><td>NOT NULL</td><td>ชื่อสินค้า</td></tr>
+            <tr><td><code>slug</code></td><td>VARCHAR(255)</td><td>NOT NULL, UNIQUE</td><td>URL Slug ของสินค้า</td></tr>
+            <tr><td><code>description</code></td><td>TEXT</td><td>NOT NULL</td><td>รายละเอียดสินค้า</td></tr>
+            <tr><td><code>price</code></td><td>DECIMAL(10,2)</td><td>NOT NULL</td><td>ราคาสินค้า</td></tr>
+            <tr><td><code>stock</code></td><td>INT</td><td>NOT NULL, default: 0</td><td>จำนวนคงเหลือในคลัง</td></tr>
+            <tr><td><code>image</code></td><td>VARCHAR(255)</td><td>NULL</td><td>รูปภาพสินค้า</td></tr>
+            <tr><td><code>is_active</code></td><td>BOOLEAN</td><td>NOT NULL, default: 1</td><td>สถานะเปิดขาย (1=เปิด, 0=ปิด)</td></tr>
+            <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่สร้าง</td></tr>
+            <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่แก้ไข</td></tr>
+        </tbody>
+    </table>
+
+    <h5 class="fw-bold mt-4">2.4 ตาราง <code>carts</code> (ตะกร้าสินค้า)</h5>
+    <table class="table table-bordered table-striped mb-4">
+        <thead><tr><th>ชื่อคอลัมน์</th><th>ชนิดข้อมูล</th><th>คุณสมบัติ</th><th>คำอธิบาย</th></tr></thead>
+        <tbody>
+            <tr><td><code>id</code></td><td>BIGINT</td><td>PK, Auto Increment</td><td>รหัสรายการในตะกร้า</td></tr>
+            <tr><td><code>user_id</code></td><td>BIGINT</td><td>FK, NOT NULL</td><td>เชื่อมไปยัง <code>users.id</code></td></tr>
+            <tr><td><code>product_id</code></td><td>BIGINT</td><td>FK, NOT NULL</td><td>เชื่อมไปยัง <code>products.id</code></td></tr>
+            <tr><td><code>quantity</code></td><td>INT</td><td>NOT NULL, default: 1</td><td>จำนวนที่เลือก</td></tr>
+            <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่เพิ่มลงตะกร้า</td></tr>
+            <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่อัปเดต</td></tr>
+        </tbody>
+    </table>
+
+    <h5 class="fw-bold mt-4">2.5 ตาราง <code>orders</code> (คำสั่งซื้อ)</h5>
+    <table class="table table-bordered table-striped mb-4">
+        <thead><tr><th>ชื่อคอลัมน์</th><th>ชนิดข้อมูล</th><th>คุณสมบัติ</th><th>คำอธิบาย</th></tr></thead>
+        <tbody>
+            <tr><td><code>id</code></td><td>BIGINT</td><td>PK, Auto Increment</td><td>รหัสออเดอร์</td></tr>
+            <tr><td><code>user_id</code></td><td>BIGINT</td><td>FK, NOT NULL</td><td>เชื่อมไปยัง <code>users.id</code></td></tr>
+            <tr><td><code>order_number</code></td><td>VARCHAR(255)</td><td>NOT NULL, UNIQUE</td><td>รหัสอ้างอิงคำสั่งซื้อ (เช่น ORD-20260922-XXXX)</td></tr>
+            <tr><td><code>total_amount</code></td><td>DECIMAL(10,2)</td><td>NOT NULL</td><td>ยอดรวมสุทธิ</td></tr>
+            <tr><td><code>status</code></td><td>ENUM</td><td>NOT NULL, default: 'pending'</td><td>pending, processing, shipped, delivered, cancelled</td></tr>
+            <tr><td><code>shipping_name</code></td><td>VARCHAR(255)</td><td>NOT NULL</td><td>ชื่อผู้รับพัสดุ</td></tr>
+            <tr><td><code>shipping_address</code></td><td>TEXT</td><td>NOT NULL</td><td>ที่อยู่จัดส่ง</td></tr>
+            <tr><td><code>shipping_phone</code></td><td>VARCHAR(20)</td><td>NOT NULL</td><td>เบอร์โทรผู้รับ</td></tr>
+            <tr><td><code>note</code></td><td>TEXT</td><td>NULL</td><td>หมายเหตุคำสั่งซื้อ</td></tr>
+            <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่สั่งซื้อ</td></tr>
+            <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่แก้ไขสถานะ</td></tr>
+        </tbody>
+    </table>
+
+    <h5 class="fw-bold mt-4">2.6 ตาราง <code>order_items</code> (รายการสินค้าในคำสั่งซื้อ)</h5>
+    <table class="table table-bordered table-striped mb-4">
+        <thead><tr><th>ชื่อคอลัมน์</th><th>ชนิดข้อมูล</th><th>คุณสมบัติ</th><th>คำอธิบาย</th></tr></thead>
+        <tbody>
+            <tr><td><code>id</code></td><td>BIGINT</td><td>PK, Auto Increment</td><td>รหัสรายการ</td></tr>
+            <tr><td><code>order_id</code></td><td>BIGINT</td><td>FK, NOT NULL</td><td>เชื่อมไปยัง <code>orders.id</code></td></tr>
+            <tr><td><code>product_id</code></td><td>BIGINT</td><td>FK, NOT NULL</td><td>เชื่อมไปยัง <code>products.id</code></td></tr>
+            <tr><td><code>product_name</code></td><td>VARCHAR(255)</td><td>NOT NULL</td><td>ชื่อสินค้า ณ เวลาที่สั่งซื้อ</td></tr>
+            <tr><td><code>price</code></td><td>DECIMAL(10,2)</td><td>NOT NULL</td><td>ราคาต่อหน่วย ณ เวลาสั่งซื้อ</td></tr>
+            <tr><td><code>quantity</code></td><td>INT</td><td>NOT NULL</td><td>จำนวนชิ้นที่สั่ง</td></tr>
+            <tr><td><code>subtotal</code></td><td>DECIMAL(10,2)</td><td>NOT NULL</td><td>ราคารวมรายการ (price * quantity)</td></tr>
+            <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่สร้าง</td></tr>
+            <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>NULL</td><td>วันที่แก้ไข</td></tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
