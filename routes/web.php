@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 
 // ============================================
 // 🏠 หน้าแรก & 🏪 หน้าร้าน (พลับ)
@@ -43,7 +45,6 @@ Route::middleware('auth')->group(function () {
 // ⚙️ Admin Routes (โชค / ปิงปอง / กวาง)
 // ============================================
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    // Dashboard (ปิงปอง)
-    // จัดการสินค้า & หมวดหมู่ (โชค)
-    // จัดการคำสั่งซื้อ (กวาง)
+    Route::resource('products', ProductController::class);
+    Route::resource('categories', CategoryController::class);
 });
