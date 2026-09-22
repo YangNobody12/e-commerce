@@ -1,14 +1,24 @@
-FROM php:8.2-apache
+# Stage 1: Build frontend assets
+FROM node:20-alpine AS frontend
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Stage 2: PHP Application
+FROM php:8.4-apache
 
 # Install system dependencies & PostgreSQL libraries
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     libzip-dev \
+    libicu-dev \
     zip \
     unzip \
     git \
     curl \
-    && docker-php-ext-install -j$(nproc) pdo_pgsql pgsql pdo_mysql zip bcmath opcache \
+    && docker-php-ext-install -j$(nproc) pdo_pgsql pgsql pdo_mysql zip bcmath opcache intl \
     && a2enmod rewrite \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -23,6 +33,9 @@ COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Copy application source code
 COPY . /var/www/html
+
+# Copy built frontend assets from node builder
+COPY --from=frontend /app/public/build /var/www/html/public/build
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
