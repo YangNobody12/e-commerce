@@ -17,7 +17,7 @@
 
 ---
 
-## 2. โครงร่างสไลด์การนำเสนอ (Slide Deck Outline - 10 สไลด์)
+## 2. โครงร่างสไลด์การนำเสนอ (Slide Deck Outline - 9 สไลด์)
 
 ### สไลด์ที่ 1: หน้าปก (Title Slide)
 - **หัวข้อ:** โครงการพัฒนาระบบร้านค้าออนไลน์ (E-Commerce Web Application)
@@ -29,54 +29,48 @@
   5. ปิงปอง (User Profile & Admin)
 - **สถาบัน:** มหาวิทยาลัยราชภัฏเชียงใหม่
 
-### สไลด์ที่ 2: ที่มาและความสำคัญ (Problem & Motivation)
-- การเติบโตของการค้าออนไลน์ (E-Commerce) ในปัจจุบัน
-- ความต้องการระบบร้านค้าที่ใช้งานง่าย รวดเร็ว รองรับการค้นหาสินค้าที่แม่นยำ
-- ปัญหาที่พบบ่อยในระบบทั่วไป: สต็อกสินค้าไม่ตัดจริง, ข้อมูลคำสั่งซื้อไม่สัมพันธ์กับสินค้า, ผู้ดูแลระบบจัดการยาก
-
-### สไลด์ที่ 3: สถาปัตยกรรม & เทคโนโลยีที่ใช้ (Tech Stack)
+### สไลด์ที่ 2: สถาปัตยกรรม & เทคโนโลยีที่ใช้ (Tech Stack)
 - **Backend:** Laravel 11 (PHP 8.2+) สถาปัตยกรรม MVC
 - **Frontend:** Blade Templates, Bootstrap 5, Bootstrap Icons, Vanilla CSS
 - **Database:** Supabase (PostgreSQL) / SQLite Database
 - **Authentication & Security:** Laravel Breeze, Bcrypt Password Hashing, CSRF Protection
 - **Version Control:** Git & GitHub (ทำงานแยก Branch 5 คน: `feature/auth`, `feature/frontend`, `feature/products`, `feature/cart-orders`, `feature/admin`)
 
-### สไลด์ที่ 4: การออกแบบฐานข้อมูล (Database Design & ER-Diagram)
+### สไลด์ที่ 3: การออกแบบฐานข้อมูล (Database Design & ER-Diagram)
 - นำเสนอแผนภาพ **ER-Diagram** (6 ตารางหลัก):
   - `users` ➔ `carts` ➔ `products`
   - `categories` ➔ `products`
   - `users` ➔ `orders` ➔ `order_items` ➔ `products`
 - อธิบายการใช้ Foreign Key, Cascade Delete, และ Unique Constraint ป้องกันข้อมูลซ้ำซ้อน
 
-### สไลด์ที่ 5: ฟังก์ชันหลักฝั่งลูกค้า (Customer Journey Features)
+### สไลด์ที่ 4: ฟังก์ชันหลักฝั่งลูกค้า (Customer Journey Features)
 - ค้นหาสินค้าแบบ Real-time ตามชื่อ, หมวดหมู่ และช่วงราคา
 - ตะกร้าสินค้าแสดงจำนวนแบบไดนามิกบน Navbar
 - สั่งซื้อสินค้าพร้อมบันทึกที่อยู่จัดส่งและตัดสต็อกสินค้าทันที
 - ติดตามสถานะคำสั่งซื้อแบบแบ่งรหัสสีเข้าใจง่าย (รอชำระ, ดำเนินการ, จัดส่ง, สำเร็จ)
 
-### สไลด์ที่ 6: ฟังก์ชันหลักฝั่งผู้ดูแลระบบ (Admin Panel Features)
+### สไลด์ที่ 5: ฟังก์ชันหลักฝั่งผู้ดูแลระบบ (Admin Panel Features)
 - แดชบอร์ดสรุปยอดขายรวม, จำนวนออเดอร์, จำนวนสินค้า, และจำนวนสมาชิก
 - จัดการหมวดหมู่และสินค้าแบบครบวงจร (CRUD) พร้อมอัปโหลดรูปภาพ
 - จัดการคำสั่งซื้อและเปลี่ยนสถานะออเดอร์ได้ทันที
 - จัดการสิทธิ์ผู้ใช้งาน (User / Admin)
 
-### สไลด์ที่ 7: จุดเด่นและเทคนิคทางโปรแกรมมิ่ง (Technical Highlights)
+### สไลด์ที่ 6: จุดเด่นและเทคนิคทางโปรแกรมมิ่ง (Technical Highlights)
 - **Database Transactions:** ควบคุมการสั่งซื้อและตัดสต็อก ป้องกันข้อผิดพลาดกรณีสต็อกสินค้าไม่พอ
 - **Snapshot Pricing:** บันทึกราคาและชื่อสินค้า ณ เวลาสั่งซื้อในตาราง `order_items` เพื่อป้องกันปัญหายอดเงินเปลี่ยนเมื่อสินค้าราคาเปลี่ยนในอนาคต
 - **Thai Unicode Slug Fallback:** รองรับการสร้าง URL Slug สำหรับชื่อภาษาไทยโดยไม่ทำให้ระบบ Error
 - **Automated Directory Generator:** ตรวจสอบและสร้างโฟลเดอร์สำหรับเก็บไฟล์รูปภาพอัตโนมัติเมื่อมีการอัปโหลด
 
-### สไลด์ที่ 8: การทดสอบคุณภาพระบบ (Quality Assurance & Automated Testing)
+### สไลด์ที่ 7: การทดสอบคุณภาพระบบ (Quality Assurance & Automated Testing)
 - พัฒนาชุดทดสอบอัตโนมัติด้วย **PHPUnit / Pest**
-- ผ่านการทดสอบ **100% (40 Tests, 110 Assertions)**
+- ผ่านการทดสอบ **100% (41 Tests, 118 Assertions)**
 - ครอบคลุมทั้งระบบ Auth, Profile, Frontend, Admin, และ Cart & Order Workflow
 
-### สไลด์ที่ 9: บทเรียนที่ได้รับและการทำงานร่วมกัน (Teamwork & Retrospective)
+### สไลด์ที่ 8: ภาพรวมการสาธิตการทำงานจริง (Live Demo Flow)
 - การทำงานร่วมกันผ่าน Git Branching Strategy (Feature Branch ➔ Develop ➔ Main)
-- การแก้ปัญหา Merge Conflicts อย่างเป็นระบบ
-- การวาง Database Schema ล่วงหน้าช่วยให้ทุกคนพัฒนาโค้ดไปในทิศทางเดียวกัน
+- การแบ่งขั้นตอนสาธิตระบบ 4 สเต็ปอย่างราบรื่นระหว่างลูกค้าและแอดมิน
 
-### สไลด์ที่ 10: สรุปผลและถาม-ตอบ (Conclusion & Q&A)
+### สไลด์ที่ 9: สรุปผลและถาม-ตอบ (Conclusion & Q&A)
 - สรุปความสำเร็จของโปรเจกต์
 - ขอบคุณอาจารย์และเพื่อนๆ พร้อมเข้าสู่ช่วง Live Demo และตอบข้อซักถาม
 
