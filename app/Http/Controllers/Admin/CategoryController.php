@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -26,7 +27,7 @@ class CategoryController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
         ]);
 
         $data = $request->only(['name', 'description']);
@@ -39,13 +40,18 @@ class CategoryController extends Controller
         $data['slug'] = $slug;
 
         if ($request->hasFile('image')) {
-            $dir = public_path('images/categories');
-            if (!file_exists($dir)) {
-                mkdir($dir, 0755, true);
+            try {
+                $dir = public_path('images/categories');
+                if (!is_dir($dir)) {
+                    @mkdir($dir, 0775, true);
+                }
+                $imageName = time() . '_' . uniqid() . '.' . $request->image->extension();
+                $request->image->move($dir, $imageName);
+                $data['image'] = 'images/categories/' . $imageName;
+            } catch (\Throwable $e) {
+                Log::error('Category image store error: ' . $e->getMessage());
+                return back()->withInput()->with('error', 'ไม่สามารถอัปโหลดรูปภาพได้: ' . $e->getMessage());
             }
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move($dir, $imageName);
-            $data['image'] = 'images/categories/' . $imageName;
         }
 
         Category::create($data);
@@ -63,7 +69,7 @@ class CategoryController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
         ]);
 
         $data = $request->only(['name', 'description']);
@@ -76,17 +82,22 @@ class CategoryController extends Controller
         $data['slug'] = $slug;
 
         if ($request->hasFile('image')) {
-            if ($category->image && file_exists(public_path($category->image))) {
-                unlink(public_path($category->image));
-            }
+            try {
+                if ($category->image && !str_starts_with($category->image, 'http') && is_file(public_path($category->image))) {
+                    @unlink(public_path($category->image));
+                }
 
-            $dir = public_path('images/categories');
-            if (!file_exists($dir)) {
-                mkdir($dir, 0755, true);
+                $dir = public_path('images/categories');
+                if (!is_dir($dir)) {
+                    @mkdir($dir, 0775, true);
+                }
+                $imageName = time() . '_' . uniqid() . '.' . $request->image->extension();
+                $request->image->move($dir, $imageName);
+                $data['image'] = 'images/categories/' . $imageName;
+            } catch (\Throwable $e) {
+                Log::error('Category image update error: ' . $e->getMessage());
+                return back()->withInput()->with('error', 'ไม่สามารถอัปโหลดรูปภาพได้: ' . $e->getMessage());
             }
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move($dir, $imageName);
-            $data['image'] = 'images/categories/' . $imageName;
         }
 
         $category->update($data);
@@ -96,8 +107,8 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        if ($category->image && file_exists(public_path($category->image))) {
-            unlink(public_path($category->image));
+        if ($category->image && !str_starts_with($category->image, 'http') && is_file(public_path($category->image))) {
+            @unlink(public_path($category->image));
         }
 
         $category->delete();

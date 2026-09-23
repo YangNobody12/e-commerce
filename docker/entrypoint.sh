@@ -6,9 +6,10 @@ PORT="${PORT:-80}"
 sed -i "s/Listen 80/Listen ${PORT}/g" /etc/apache2/ports.conf
 sed -i "s/<VirtualHost \*:80>/<VirtualHost \*:${PORT}>/g" /etc/apache2/sites-available/000-default.conf
 
-# Ensure storage and bootstrap/cache permissions
-chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# Ensure upload, storage, and bootstrap/cache permissions
+mkdir -p /var/www/html/public/images/categories /var/www/html/public/images/products
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public/images
+chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public/images
 
 # Cache Laravel configuration, routes, and views if APP_KEY is provided
 if [ -n "$APP_KEY" ]; then

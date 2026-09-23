@@ -32,15 +32,28 @@ class Product extends Model
 
         static::creating(function ($product) {
             if (empty($product->slug)) {
-                $product->slug = Str::slug($product->name);
+                $product->slug = Str::slug($product->name) ?: 'product-' . time() . '-' . uniqid();
             }
         });
 
         static::updating(function ($product) {
             if (empty($product->slug)) {
-                $product->slug = Str::slug($product->name);
+                $product->slug = Str::slug($product->name) ?: 'product-' . time() . '-' . uniqid();
             }
         });
+    }
+
+    public function getImageUrlAttribute(): ?string
+    {
+        if (!$this->image) {
+            return null;
+        }
+
+        if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
+            return $this->image;
+        }
+
+        return asset($this->image);
     }
 
     public function category()

@@ -27,8 +27,8 @@
                     <tr>
                         <td>{{ $category->id }}</td>
                         <td>
-                            @if($category->image)
-                                <img src="{{ asset($category->image) }}" width="50" height="50" class="rounded">
+                            @if($category->image_url)
+                                <img src="{{ $category->image_url }}" width="50" height="50" class="rounded" style="object-fit: cover;">
                             @else
                                 <span class="text-muted">-</span>
                             @endif

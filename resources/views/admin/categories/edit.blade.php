@@ -31,9 +31,9 @@
 
             <div class="mb-3">
                 <label class="form-label fw-bold">รูปหมวดหมู่</label>
-                @if($category->image)
+                @if($category->image_url)
                     <div class="mb-2">
-                        <img src="{{ asset($category->image) }}" class="img-thumbnail" width="150">
+                        <img src="{{ $category->image_url }}" class="img-thumbnail" width="150">
                     </div>
                 @endif
                 <input type="file" name="image" class="form-control" accept="image/*">

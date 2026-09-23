@@ -8,6 +8,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Facades\Log;
+
 class ProductController extends Controller
 {
     public function index()
@@ -32,7 +34,7 @@ class ProductController extends Controller
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'min:0'],
             'stock' => ['required', 'integer', 'min:0'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
             'is_active' => ['boolean'],
         ]);
 
@@ -47,13 +49,18 @@ class ProductController extends Controller
         $data['is_active'] = $request->has('is_active');
 
         if ($request->hasFile('image')) {
-            $dir = public_path('images/products');
-            if (!file_exists($dir)) {
-                mkdir($dir, 0755, true);
+            try {
+                $dir = public_path('images/products');
+                if (!is_dir($dir)) {
+                    @mkdir($dir, 0775, true);
+                }
+                $imageName = time() . '_' . uniqid() . '.' . $request->image->extension();
+                $request->image->move($dir, $imageName);
+                $data['image'] = 'images/products/' . $imageName;
+            } catch (\Throwable $e) {
+                Log::error('Product image store error: ' . $e->getMessage());
+                return back()->withInput()->with('error', 'ไม่สามารถอัปโหลดรูปภาพได้: ' . $e->getMessage());
             }
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move($dir, $imageName);
-            $data['image'] = 'images/products/' . $imageName;
         }
 
         Product::create($data);
@@ -76,7 +83,7 @@ class ProductController extends Controller
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'min:0'],
             'stock' => ['required', 'integer', 'min:0'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
             'is_active' => ['boolean'],
         ]);
 
@@ -91,17 +98,22 @@ class ProductController extends Controller
         $data['is_active'] = $request->has('is_active');
 
         if ($request->hasFile('image')) {
-            if ($product->image && file_exists(public_path($product->image))) {
-                unlink(public_path($product->image));
-            }
+            try {
+                if ($product->image && !str_starts_with($product->image, 'http') && is_file(public_path($product->image))) {
+                    @unlink(public_path($product->image));
+                }
 
-            $dir = public_path('images/products');
-            if (!file_exists($dir)) {
-                mkdir($dir, 0755, true);
+                $dir = public_path('images/products');
+                if (!is_dir($dir)) {
+                    @mkdir($dir, 0775, true);
+                }
+                $imageName = time() . '_' . uniqid() . '.' . $request->image->extension();
+                $request->image->move($dir, $imageName);
+                $data['image'] = 'images/products/' . $imageName;
+            } catch (\Throwable $e) {
+                Log::error('Product image update error: ' . $e->getMessage());
+                return back()->withInput()->with('error', 'ไม่สามารถอัปโหลดรูปภาพได้: ' . $e->getMessage());
             }
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move($dir, $imageName);
-            $data['image'] = 'images/products/' . $imageName;
         }
 
         $product->update($data);
@@ -111,8 +123,8 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        if ($product->image && file_exists(public_path($product->image))) {
-            unlink(public_path($product->image));
+        if ($product->image && !str_starts_with($product->image, 'http') && is_file(public_path($product->image))) {
+            @unlink(public_path($product->image));
         }
 
         $product->delete();

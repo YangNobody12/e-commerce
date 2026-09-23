@@ -30,8 +30,8 @@
                     <tr>
                         <td>{{ $product->id }}</td>
                         <td>
-                            @if($product->image)
-                                <img src="{{ asset($product->image) }}" width="50" height="50" class="rounded" style="object-fit: cover;">
+                            @if($product->image_url)
+                                <img src="{{ $product->image_url }}" width="50" height="50" class="rounded" style="object-fit: cover;">
                             @else
                                 <span class="text-muted">ไม่มีรูป</span>
                             @endif

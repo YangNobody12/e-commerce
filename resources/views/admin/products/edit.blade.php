@@ -69,9 +69,9 @@
 
                     <div class="mb-3">
                         <label class="form-label fw-bold">รูปสินค้า</label>
-                        @if($product->image)
+                        @if($product->image_url)
                             <div class="mb-2">
-                                <img src="{{ asset($product->image) }}" class="img-thumbnail" width="150">
+                                <img src="{{ $product->image_url }}" class="img-thumbnail" width="150">
                             </div>
                         @endif
                         <input type="file" name="image" class="form-control" accept="image/*">
