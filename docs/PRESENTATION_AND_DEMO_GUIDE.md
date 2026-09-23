@@ -17,7 +17,7 @@
 
 ---
 
-## 2. โครงร่างสไลด์การนำเสนอ (Slide Deck Outline - 9 สไลด์)
+## 2. โครงร่างสไลด์การนำเสนอ (Slide Deck Outline - 8 สไลด์)
 
 ### สไลด์ที่ 1: หน้าปก (Title Slide)
 - **หัวข้อ:** โครงการพัฒนาระบบร้านค้าออนไลน์ (E-Commerce Web Application)
@@ -61,16 +61,11 @@
 - **Thai Unicode Slug Fallback:** รองรับการสร้าง URL Slug สำหรับชื่อภาษาไทยโดยไม่ทำให้ระบบ Error
 - **Automated Directory Generator:** ตรวจสอบและสร้างโฟลเดอร์สำหรับเก็บไฟล์รูปภาพอัตโนมัติเมื่อมีการอัปโหลด
 
-### สไลด์ที่ 7: การทดสอบคุณภาพระบบ (Quality Assurance & Automated Testing)
-- พัฒนาชุดทดสอบอัตโนมัติด้วย **PHPUnit / Pest**
-- ผ่านการทดสอบ **100% (41 Tests, 118 Assertions)**
-- ครอบคลุมทั้งระบบ Auth, Profile, Frontend, Admin, และ Cart & Order Workflow
-
-### สไลด์ที่ 8: ภาพรวมการสาธิตการทำงานจริง (Live Demo Flow)
+### สไลด์ที่ 7: ภาพรวมการสาธิตการทำงานจริง (Live Demo Flow)
 - การทำงานร่วมกันผ่าน Git Branching Strategy (Feature Branch ➔ Develop ➔ Main)
 - การแบ่งขั้นตอนสาธิตระบบ 4 สเต็ปอย่างราบรื่นระหว่างลูกค้าและแอดมิน
 
-### สไลด์ที่ 9: สรุปผลและถาม-ตอบ (Conclusion & Q&A)
+### สไลด์ที่ 8: สรุปผลและถาม-ตอบ (Conclusion & Q&A)
 - สรุปความสำเร็จของโปรเจกต์
 - ขอบคุณอาจารย์และเพื่อนๆ พร้อมเข้าสู่ช่วง Live Demo และตอบข้อซักถาม
 
